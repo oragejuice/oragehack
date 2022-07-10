@@ -2,7 +2,6 @@ package me.oragejuice.oragehack.mixins;
 
 import me.oragejuice.oragehack.tweak.Tweaker;
 import net.minecraft.client.Minecraft;
-import org.apache.logging.log4j.Logger;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.PixelFormat;
@@ -13,8 +12,6 @@ import org.spongepowered.asm.mixin.Shadow;
 @Mixin(Minecraft.class)
 public class MixinMinecraft {
 
-    @Shadow
-    private static Logger LOGGER;
 
     @Shadow
     private boolean fullscreen;
@@ -34,6 +31,7 @@ public class MixinMinecraft {
             try {
                 Thread.sleep(1000L);
             } catch (InterruptedException e) {
+                e.printStackTrace();
             }
             if (this.fullscreen) {
                 this.updateDisplayMode();

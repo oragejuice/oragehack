@@ -42,7 +42,8 @@ public class Tweaker implements ITweaker {
 
     @Override
     public void injectIntoClassLoader(LaunchClassLoader classLoader) {
-        LOGGER.info("Hello from tweaker :D");
+        LOGGER.info("oragehack loading...");
+        doInitialSetup(classLoader);
         MixinBootstrap.init();
 
         // Find all of the other tweakers that are being loaded
@@ -72,6 +73,7 @@ public class Tweaker implements ITweaker {
     @Override
     @SuppressWarnings("unchecked")
     public String[] getLaunchArguments() {
+
         // Parse the arguments that we are able to pass to the game
         List<Argument> parsed = Arguments.parse(this.args);
 

@@ -12,12 +12,11 @@ import java.util.Set;
 
 @SupportedAnnotationTypes("processor.TestAnnotation")
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
-//@AutoService(Processor.class)
 public class Processor extends AbstractProcessor {
 
     @Override
     public boolean process(Set<? extends TypeElement> set, RoundEnvironment roundEnvironment) {
-
+        System.out.println("Called!");
         for (Element annotation : roundEnvironment.getElementsAnnotatedWith(TestAnnotation.class)) {
             System.out.println("THING FOUND!!!!");
         }
