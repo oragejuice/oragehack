@@ -1,5 +1,0 @@
-me/oragejuice/oragehack/mixins/MixinMinecraft LOGGER field_147123_G
-me/oragejuice/oragehack/mixins/MixinMinecraft fullscreen field_71431_Q
-me/oragejuice/oragehack/mixins/GuiIngameMixin mc field_73839_d
-me/oragejuice/oragehack/mixins/MixinMinecraft updateDisplayMode ()V func_110441_Q
-me/oragejuice/oragehack/mixins/MixinMinecraft createDisplay ()V func_175609_am
