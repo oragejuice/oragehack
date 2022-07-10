@@ -15,12 +15,12 @@ public final class SingularArgument implements Argument {
     }
 
     @Override
-    public final void addToList(List<String> arguments) {
+    public void addToList(List<String> arguments) {
         arguments.add(this.value);
     }
 
     @Override
-    public final boolean conflicts(Argument argument) {
+    public boolean conflicts(Argument argument) {
         if (!(argument instanceof SingularArgument))
             return false;
 
