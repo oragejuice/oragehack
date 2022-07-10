@@ -1,7 +1,7 @@
 package me.oragejuice.oragehack.mixins;
 
 
-import me.oragejuice.oragehack.SimpleTweaker;
+import me.oragejuice.oragehack.tweak.Tweaker;
 import net.minecraft.client.entity.EntityPlayerSP;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -13,7 +13,7 @@ public abstract class EntityPlayerSPMixin {
 
     @Inject(method = "onUpdate", at = @At("HEAD"))
     public void onUpdate(CallbackInfo ci) {
-        SimpleTweaker.LOGGER.info("owo");
+        Tweaker.LOGGER.info("owo");
     }
 
 }

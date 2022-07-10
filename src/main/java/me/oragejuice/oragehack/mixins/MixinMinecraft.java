@@ -1,6 +1,6 @@
 package me.oragejuice.oragehack.mixins;
 
-import me.oragejuice.oragehack.SimpleTweaker;
+import me.oragejuice.oragehack.tweak.Tweaker;
 import net.minecraft.client.Minecraft;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.LWJGLException;
@@ -30,7 +30,7 @@ public class MixinMinecraft {
         try {
             Display.create((new PixelFormat()).withDepthBits(24));
         } catch (LWJGLException lwjglexception) {
-            SimpleTweaker.LOGGER.error("Couldn't set pixel format", lwjglexception);
+            Tweaker.LOGGER.error("Couldn't set pixel format", lwjglexception);
             try {
                 Thread.sleep(1000L);
             } catch (InterruptedException e) {

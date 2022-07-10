@@ -99,4 +99,3 @@ Remapping jar... 60%
 Remapping jar... 70%
 Remapping jar... 80%
 Remapping jar... 90%
-Remapping jar... 100%

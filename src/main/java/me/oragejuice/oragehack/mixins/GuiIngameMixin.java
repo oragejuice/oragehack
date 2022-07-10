@@ -1,7 +1,7 @@
 package me.oragejuice.oragehack.mixins;
 
 
-import me.oragejuice.oragehack.SimpleTweaker;
+import me.oragejuice.oragehack.tweak.Tweaker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiIngame;
 import org.spongepowered.asm.mixin.Final;
@@ -21,6 +21,6 @@ public abstract class GuiIngameMixin {
     @Inject(method = "renderGameOverlay", at = @At("HEAD"))
     public void onRenderGameOverlay(float partialTicks, CallbackInfo ci){
         mc.fontRenderer.drawStringWithShadow("oragehack", 5, 5, Color.ORANGE.getRGB());
-        SimpleTweaker.LOGGER.info("Hello!");
+        Tweaker.LOGGER.info("Hello!");
     }
 }

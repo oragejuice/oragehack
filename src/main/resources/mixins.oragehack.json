@@ -1,7 +1,7 @@
 {
   "compatibilityLevel": "JAVA_8",
   "package": "me.oragejuice.oragehack.mixins",
-  "refmap": "mixins.refmap.oragehack.json",
+  "refmap": "mixins.oragehack.refmap.json",
   "mixins": [
   ],
   "client": [
