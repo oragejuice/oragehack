@@ -23,7 +23,7 @@ import java.util.List;
  */
 public class Tweaker implements ITweaker {
 
-    public static final Logger LOGGER = LogManager.getLogger("oragehack");
+    public static final Logger LOGGER = LogManager.getLogger("OrageTweaker");
 
     private static boolean setupTransformer = false;
 

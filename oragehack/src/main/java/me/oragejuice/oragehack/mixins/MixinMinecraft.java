@@ -1,5 +1,6 @@
 package me.oragejuice.oragehack.mixins;
 
+import me.oragejuice.oragehack.Oragehack;
 import me.oragejuice.oragehack.tweak.Tweaker;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.LWJGLException;
@@ -8,6 +9,9 @@ import org.lwjgl.opengl.PixelFormat;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Minecraft.class)
 public class MixinMinecraft {
@@ -42,5 +46,10 @@ public class MixinMinecraft {
 
     @Shadow
     private void updateDisplayMode() {
+    }
+
+    @Inject(method = "init", at = @At("TAIL"))
+    public void init(CallbackInfo ci){
+        Oragehack.INSTANCE.init();
     }
 }
