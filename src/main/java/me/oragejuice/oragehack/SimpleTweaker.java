@@ -3,6 +3,8 @@ package me.oragejuice.oragehack;
 import me.oragejuice.oragehack.argument.Argument;
 import me.oragejuice.oragehack.argument.Arguments;
 import me.oragejuice.oragehack.transform.SimpleTransformer;
+import net.minecraft.client.gui.GuiChat;
+import net.minecraft.client.gui.GuiIngame;
 import net.minecraft.launchwrapper.ITweaker;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraft.launchwrapper.LaunchClassLoader;

@@ -26,7 +26,7 @@ public class MixinMinecraft {
     @Overwrite
     private void createDisplay() throws LWJGLException {
         Display.setResizable(true);
-        Display.setTitle("Backdoored");
+        Display.setTitle("oragehack-0.1b");
         try {
             Display.create((new PixelFormat()).withDepthBits(24));
         } catch (LWJGLException lwjglexception) {

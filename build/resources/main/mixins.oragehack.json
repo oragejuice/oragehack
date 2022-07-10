@@ -1,10 +1,12 @@
 {
   "compatibilityLevel": "JAVA_8",
   "package": "me.oragejuice.oragehack.mixins",
-  "refmap": "refmap.example.json",
+  "refmap": "mixins.refmap.oragehack.json",
   "mixins": [
   ],
   "client": [
+    "EntityPlayerSPMixin",
+    "GuiIngameMixin",
     "MixinMinecraft"
   ],
   "server": []

@@ -74,7 +74,8 @@ configurations {
 
 
 mixin {
-    //add sourceSets.main, mod_mixin_refmap.replace('${mod_id}', mod_id)
+    defaultObfuscationEnv 'searge'
+
     add sourceSets.main, 'mixins.oragehack.refmap.json'
     config 'mixins.oragehack.json'
 
@@ -106,6 +107,7 @@ jar {
             "MixinConfigs": "mixins.oragehack.json"
         )
     }
+
     dependsOn configurations.embed
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     from {
