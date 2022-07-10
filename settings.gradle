@@ -1,2 +1,4 @@
 rootProject.name = 'oragehack'
+include 'oragehack'
+include 'processor'
 

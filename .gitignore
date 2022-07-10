@@ -20,3 +20,7 @@ build
 # other
 eclipse
 run
+
+# client
+client/build
+client/run
