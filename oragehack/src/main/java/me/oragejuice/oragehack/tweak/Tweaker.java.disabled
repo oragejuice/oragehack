@@ -1,5 +1,8 @@
 package me.oragejuice.oragehack.tweak;
 
+import me.oragejuice.oragehack.tweak.argument.Argument;
+import me.oragejuice.oragehack.tweak.argument.Arguments;
+import me.oragejuice.oragehack.tweak.transform.SimpleTransformer;
 import net.minecraft.launchwrapper.ITweaker;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraft.launchwrapper.LaunchClassLoader;
@@ -18,26 +21,20 @@ public class Tweaker implements ITweaker {
 
     public static final Logger LOGGER = LogManager.getLogger("OrageTweaker");
 
-    private final List<String> args = new ArrayList<>();
+    private static boolean setupTransformer = false;
+
+    /**
+     * The raw game launch arguments that are provided in {@link Tweaker#acceptOptions(List, File, File, String)}
+     */
+    private List<String> args;
 
     @Override
     public void acceptOptions(List<String> args, File gameDir, File assetsDir, String profile) {
-        this.args.addAll(args);
-
-        if (gameDir != null) {
-            this.args.add("--gameDir");
-            this.args.add(gameDir.getAbsolutePath());
-        }
-
-        if (assetsDir != null) {
-            this.args.add("--assetsDir");
-            this.args.add(assetsDir.getAbsolutePath());
-        }
-
-        if (profile != null) {
-            this.args.add("--version");
-            this.args.add(profile);
-        }    }
+        (this.args = new ArrayList<>()).addAll(args);
+        addArg("gameDir", gameDir);
+        addArg("assetsDir", assetsDir);
+        addArg("version", profile);
+    }
 
     @Override
     public void injectIntoClassLoader(LaunchClassLoader classLoader) {
@@ -59,7 +56,25 @@ public class Tweaker implements ITweaker {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public String[] getLaunchArguments() {
-        return ((List<?>) Launch.blackboard.get("ArgumentList")).isEmpty() ? this.args.toArray(new String[0]) : new String[0];
+        List<Argument> parsed = Arguments.parse(this.args);
+        List<Argument> existing = Arguments.parse((List<String>) Launch.blackboard.get("ArgumentList"));
+        parsed.removeIf(argument -> existing.stream().anyMatch(a -> a.conflicts(argument)));
+        return Arguments.join(parsed).toArray(new String[0]);
     }
+
+    private void addArg(String label, File file) {
+        if (file != null)
+            addArg(label, file.getAbsolutePath());
+    }
+
+    private void addArg(String label, String value) {
+        if (!args.contains("--" + label) && value != null) {
+            this.args.add("--" + label);
+            this.args.add(value);
+        }
+    }
+
+
 }

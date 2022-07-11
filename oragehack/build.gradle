@@ -1,20 +1,24 @@
 buildscript {
     repositories {
+        maven { url "https://plugins.gradle.org/m2/" }
         maven { url = 'https://files.minecraftforge.net/maven' }
         maven { url = "https://repo.spongepowered.org/maven" }
         jcenter()
         mavenCentral()
     }
     dependencies {
+        //classpath "gradle.plugin.net.minecraftforge.gradle:ForgeGradle:2.0.2"
         classpath 'net.minecraftforge.gradle:ForgeGradle:5.+'
         classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
     }
 }
 
 plugins {
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
     id 'java'
 }
 
+//apply plugin: "net.minecraftforge.gradle.tweaker-client"
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'eclipse'
@@ -28,10 +32,8 @@ compileJava {
 }
 
 minecraft {
-    mappings channel: mappings_channel, version: mappings_version
-    // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
-    // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
-
+    //mappings channel: mappings_channel, version: mappings_version
+    mappings channel: 'snapshot', version: '20180814-1.12'
 
     runs {
         client {
@@ -46,6 +48,7 @@ minecraft {
         }
     }
 
+    //makeObfSourceJar = true
 }
 
 task('sourceJar', type: Jar, dependsOn: classes) {
@@ -58,6 +61,7 @@ artifacts {
     archives sourceJar
 }
 
+
 repositories {
     mavenCentral()
     maven {
@@ -69,8 +73,17 @@ repositories {
 }
 
 configurations {
-    embed
-    compile.extendsFrom(embed)
+    shade
+    implementation.extendsFrom shade
+    //embed
+    //compile.extendsFrom(embed)
+}
+
+shadowJar {
+    archiveClassifier = ''
+    configurations = [project.configurations.shade]
+    relocate 'org.spongepowered.mixin', "${project.group}.relocated.mixin"
+    finalizedBy 'reobfShadowJar'
 }
 
 
@@ -90,9 +103,9 @@ dependencies {
     compileOnly 'me.oragejuice:processor:1.0'
     annotationProcessor 'me.oragejuice:processor:1.0'
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
-    embed ('net.minecraft:launchwrapper:1.12')
+    shade ('net.minecraft:launchwrapper:1.12')
 
-    embed implementation ('org.spongepowered:mixin:0.7.11-SNAPSHOT')
+    shade ('org.spongepowered:mixin:0.7.11-SNAPSHOT')
     {
         exclude module: 'log4j-core'
         exclude module: 'launchwrapper'
@@ -103,6 +116,12 @@ dependencies {
 
 }
 
+assemble.dependsOn shadowJar
+
+reobf {
+    shadowJar {}
+}
+
 jar {
     manifest {
         attributes(
@@ -110,11 +129,13 @@ jar {
         )
     }
 
-    dependsOn configurations.embed
+    //dependsOn configurations.embed
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    /*
     from {
         configurations.embed.collect { it.isDirectory() ? it : zipTree(it) }
     }
-
+     */
 
 }
+jar.finalizedBy('reobfJar')
