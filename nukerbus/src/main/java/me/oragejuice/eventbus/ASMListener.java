@@ -6,10 +6,8 @@ import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
-import java.io.File;
-import java.io.IOException;
+
 import java.lang.reflect.Method;
-import java.nio.file.Files;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
 
@@ -68,7 +66,7 @@ public class ASMListener extends AbstractListener {
         byte[] classBytes = w.toByteArray();
 
         /*
-        File df = new File("pyro/debug/event");
+        File df = new File("oragehack/debug/event");
         df.mkdirs();
         File d = new File(df, String.format("%s.class", handlerName));
         System.out.println(d.getAbsoluteFile().toString());

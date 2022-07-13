@@ -9,16 +9,17 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public class EventManager {
-
-    private final ConcurrentHashMap<Class<?>, CopyOnWriteArrayList<AbstractListener>> listenerMultimap = new ConcurrentHashMap<>();
+    /*
+    If I start to see issues with Concurrency then replace with Concorruent hashmaps
+     */
+    private final ConcurrentHashMap<Class<?>, ArrayList<AbstractListener>> listenerMultimap = new ConcurrentHashMap<>();
     private final Multimap<Object, AbstractListener> parentListeners = Multimaps.newSetMultimap(new ConcurrentHashMap<>(), ConcurrentHashMap::newKeySet);
     public static final Multimap<String, AbstractListener> cmListeners = Multimaps.newSetMultimap(new ConcurrentHashMap<>(), ConcurrentHashMap::newKeySet);
 
     public void post(Object event) {
-        final CopyOnWriteArrayList<AbstractListener> listenerList = listenerMultimap.get(event.getClass());
+        final ArrayList<AbstractListener> listenerList = listenerMultimap.get(event.getClass());
         if (listenerList != null) {
             for (AbstractListener listener : listenerList) {
                 try {
@@ -41,7 +42,7 @@ public class EventManager {
                     parentListeners.get(obj).add(listener);
                 }
                 if (!listenerMultimap.containsKey(listener.getTarget())) {
-                    listenerMultimap.put(listener.getTarget(), new CopyOnWriteArrayList<>());
+                    listenerMultimap.put(listener.getTarget(), new ArrayList<>());
                 }
                 listenerMultimap.get(listener.getTarget()).add(listener);
                 listenerMultimap.get(listener.getTarget()).sort(Comparator.comparingInt(abstractListener -> abstractListener.priority));
@@ -57,7 +58,7 @@ public class EventManager {
             parentListeners.get(object).add(listener);
         }
         if (!listenerMultimap.containsKey(listener.getTarget())) {
-            listenerMultimap.put(listener.getTarget(), new CopyOnWriteArrayList<>());
+            listenerMultimap.put(listener.getTarget(), new ArrayList<>());
         }
         listenerMultimap.get(listener.getTarget()).add(listener);
         listenerMultimap.get(listener.getTarget()).sort((first, second) -> second.priority - first.priority);
