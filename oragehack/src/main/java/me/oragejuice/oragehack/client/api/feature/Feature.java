@@ -1,35 +1,40 @@
 package me.oragejuice.oragehack.client.api.feature;
 
 
-import com.google.common.eventbus.Subscribe;
+import me.oragejuice.eventbus.EventHandler;
 import me.oragejuice.oragehack.Oragehack;
 import me.oragejuice.oragehack.client.api.INameable;
-import me.oragejuice.oragehack.client.api.event.IListener;
+import me.oragejuice.oragehack.client.api.IListener;
+import me.oragejuice.oragehack.client.api.settings.GenericSetting;
 import me.oragejuice.oragehack.client.event.KeypressEvent;
 import org.lwjgl.input.Keyboard;
 
-public class Feature implements IListener, INameable {
+import java.util.Vector;
+
+public abstract class Feature implements IListener, INameable {
 
     final String name;
-    int keybind = Keyboard.KEY_NONE;
-    final IListener[] listeners;
+    public int keybind = Keyboard.KEY_NONE;
+    private IListener[] listeners;
     private boolean enabled = false;
+    private Vector<GenericSetting> settings = new Vector<>();
 
-    public Feature(String name, IListener...listeners) {
-        this.name = name;
+    public Feature(String name, IListener... listeners) {
         this.listeners = listeners;
-        Oragehack.INSTANCE.eventBus.register(this);
+        this.name = name;
+        //Oragehack.INSTANCE.eventBus.subscribe(this);
     }
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+        if(listeners == null) return;
         if (this.enabled) {
             for (IListener listener : listeners) {
-                Oragehack.INSTANCE.eventBus.register(listener);
+                Oragehack.INSTANCE.eventBus.subscribe(listener);
             }
         } else {
             for (IListener listener : listeners) {
-                Oragehack.INSTANCE.eventBus.unregister(listener);
+                Oragehack.INSTANCE.eventBus.unsubscribe(listener);
             }
         }
     }
@@ -52,13 +57,17 @@ public class Feature implements IListener, INameable {
         return true;
     }
 
-    @Subscribe
+    @EventHandler
     public void onKeyEvent(KeypressEvent event){
         Oragehack.LOGGER.info("Key event");
         if(event.keycode == this.keybind){
-            Oragehack.LOGGER.info("Should toggle to be {} %1", this.enabled );
+            Oragehack.LOGGER.info("Should toggle to be {}", this.enabled );
             this.toggle();
         }
+    }
+
+    public IListener[] getListeners() {
+        return listeners;
     }
 
 }

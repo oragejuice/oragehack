@@ -51,6 +51,15 @@ minecraft {
     //makeObfSourceJar = true
 }
 
+tasks.withType(JavaCompile) {
+    configure(options) {
+        options.compilerArgs.add("-XDignore.symbol.file=true")
+        options.fork = true
+        options.forkOptions.executable = 'javac'
+        options.encoding = 'utf-8'
+    }
+}
+
 task('sourceJar', type: Jar, dependsOn: classes) {
     classifier = 'sources'
     from sourceSets.main.allSource
@@ -75,8 +84,6 @@ repositories {
 configurations {
     shade
     implementation.extendsFrom shade
-    //embed
-    //compile.extendsFrom(embed)
 }
 
 shadowJar {
@@ -104,6 +111,7 @@ dependencies {
     annotationProcessor 'me.oragejuice:processor:1.0'
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     shade ('net.minecraft:launchwrapper:1.12')
+    shade ('me.oragejuice.eventbus:nukerbus:1.0')
 
     shade ('org.spongepowered:mixin:0.7.11-SNAPSHOT')
     {
@@ -128,14 +136,7 @@ jar {
             "MixinConfigs": "mixins.oragehack.json"
         )
     }
-
-    //dependsOn configurations.embed
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    /*
-    from {
-        configurations.embed.collect { it.isDirectory() ? it : zipTree(it) }
-    }
-     */
 
 }
 jar.finalizedBy('reobfJar')
