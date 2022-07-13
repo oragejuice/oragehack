@@ -1,13 +1,12 @@
 import Classes.TestEvent;
 import Classes.TestFeature;
 import me.oragejuice.eventbus.ASMListener;
-import me.oragejuice.eventbus.EventHandler;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Method;
-import java.util.Arrays;
+
 
 public class TestASMListener {
 
@@ -61,6 +60,7 @@ public class TestASMListener {
         }
         ASMListener asmListener = new ASMListener(feature, method);
         Assertions.assertNotNull(asmListener.getInvoker(method));
+
     }
 
 

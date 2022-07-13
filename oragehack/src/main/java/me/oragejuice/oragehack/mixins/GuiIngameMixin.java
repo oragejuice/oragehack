@@ -1,6 +1,8 @@
 package me.oragejuice.oragehack.mixins;
 
 
+import me.oragejuice.oragehack.Oragehack;
+import me.oragejuice.oragehack.client.event.RenderOverlayEvent;
 import me.oragejuice.oragehack.tweak.Tweaker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiIngame;
@@ -18,8 +20,9 @@ public abstract class GuiIngameMixin {
 
     @Shadow @Final protected Minecraft mc;
 
-    @Inject(method = "renderGameOverlay", at = @At("HEAD"))
+    @Inject(method = "renderGameOverlay", at = @At("TAIL"))
     public void onRenderGameOverlay(float partialTicks, CallbackInfo ci){
+        Oragehack.INSTANCE.eventBus.post(new RenderOverlayEvent());
         mc.fontRenderer.drawStringWithShadow("oragehack", 5, 5, Color.ORANGE.getRGB());
         Tweaker.LOGGER.info("Hello!");
 
