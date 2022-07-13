@@ -1,4 +1,4 @@
-package me.oragejuice.oragehack.client.api.event;
+package me.oragejuice.oragehack.client.api;
 
 public interface IListener {
 

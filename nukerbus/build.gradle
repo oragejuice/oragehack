@@ -1,0 +1,43 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+group = "me.oragejuice.eventbus"
+version = 1.0
+
+version '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+tasks.withType(JavaCompile) {
+    configure(options) {
+        options.compilerArgs.add("-XDignore.symbol.file=true")
+        options.fork = true
+        options.forkOptions.executable = 'javac'
+        options.encoding = 'utf-8'
+    }
+}
+
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
+
+dependencies {
+    implementation 'org.ow2.asm:asm:6.0'
+    implementation 'com.google.guava:guava:11.0.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.2'
+}
+
+test {
+    useJUnitPlatform()
+}

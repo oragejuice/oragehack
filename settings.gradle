@@ -1,4 +1,5 @@
 rootProject.name = 'oragehack'
 include 'oragehack'
 include 'processor'
+include 'nukerbus'
 
