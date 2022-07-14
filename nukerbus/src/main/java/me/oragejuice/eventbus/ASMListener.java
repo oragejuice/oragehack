@@ -35,7 +35,6 @@ public class ASMListener extends AbstractListener {
 
         String ownerType = Type.getInternalName(method.getDeclaringClass());
         String eventType = Type.getInternalName(method.getParameterTypes()[0]);
-        System.out.println(ownerType);
         String handlerName = String.format("OrageEventWrapper$%d", invokerIdx++);
 
         ClassWriter w = new ClassWriter(0);

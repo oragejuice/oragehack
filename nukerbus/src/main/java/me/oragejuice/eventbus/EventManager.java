@@ -12,7 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class EventManager {
     /*
-    If I start to see issues with Concurrency then replace with Concorruent hashmaps
+    remember nadav If issues with Concurrency then replace with Concorruent ArrayLists cus u changed them :D
      */
     private final ConcurrentHashMap<Class<?>, ArrayList<AbstractListener>> listenerMultimap = new ConcurrentHashMap<>();
     private final Multimap<Object, AbstractListener> parentListeners = Multimaps.newSetMultimap(new ConcurrentHashMap<>(), ConcurrentHashMap::newKeySet);
@@ -36,6 +36,7 @@ public class EventManager {
         Arrays.stream(obj.getClass().getDeclaredMethods())
                 .filter(m -> m.isAnnotationPresent(EventHandler.class) && m.getParameterCount() == 1)
                 .forEach(m -> registerAsListener(obj, m, m.getAnnotation(EventHandler.class).value()));
+
         if (cmListeners.containsKey(obj.getClass().getName())) {
             for (AbstractListener listener : cmListeners.get(obj.getClass().getName())) {
                 if (!parentListeners.containsEntry(obj, listener)) {

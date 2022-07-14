@@ -1,5 +1,6 @@
 
 
+import Classes.SecondTestEvent;
 import Classes.SpeedFeature;
 import Classes.TestEvent;
 import Classes.TestFeature;
@@ -37,6 +38,23 @@ class EventBusTest {
         EVENT_BUS.post(new TestEvent());
         EVENT_BUS.post(new TestEvent());
         EVENT_BUS.post(new TestEvent());
+    }
+
+    @Test
+    @DisplayName("Doing multiple events tessting")
+    void twoEvents(){
+        EVENT_BUS.subscribe(new TestFeature());
+        EVENT_BUS.post(new TestEvent());
+        EVENT_BUS.post(new SecondTestEvent());
+        EVENT_BUS.post(new TestEvent());
+        EVENT_BUS.subscribe(new TestFeature());
+        EVENT_BUS.post(new SecondTestEvent());
+        EVENT_BUS.post(new TestEvent());
+        EVENT_BUS.post(new TestEvent());
+        EVENT_BUS.subscribe(new TestFeature());
+        EVENT_BUS.post(new TestEvent());
+        EVENT_BUS.post(new TestEvent());
+        EVENT_BUS.post(new SecondTestEvent());
     }
 
     @Test
