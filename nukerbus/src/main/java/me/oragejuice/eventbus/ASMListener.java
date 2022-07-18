@@ -35,7 +35,7 @@ public class ASMListener extends AbstractListener {
      * Creates a class that invokes a method of a given listener method by generating the specified bytecode
      * then generating an instance of that class
      */
-    public static EventInvoker createInvoker(Method method) {
+    private static EventInvoker createInvoker(Method method) {
 
         String ownerType = Type.getInternalName(method.getDeclaringClass());
         String eventType = Type.getInternalName(method.getParameterTypes()[0]);

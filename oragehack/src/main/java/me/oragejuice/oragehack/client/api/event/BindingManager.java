@@ -9,7 +9,7 @@ public class BindingManager {
 
     @EventHandler
     public void onKey(KeypressEvent event){
-        for (Feature feature : Oragehack.INSTANCE.featureManager.features) {
+        for (Feature feature : Oragehack.INSTANCE.featureManager.getFeatures()) {
             if(feature.keybind == event.keycode){
                 Oragehack.LOGGER.info("Toggled feature %s", feature.getName());
                 feature.toggle();

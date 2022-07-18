@@ -106,6 +106,9 @@ mixin {
 
 dependencies {
 
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.2'
+
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     compileOnly 'me.oragejuice:processor:1.0'
     annotationProcessor 'me.oragejuice:processor:1.0'
@@ -128,6 +131,10 @@ assemble.dependsOn shadowJar
 
 reobf {
     shadowJar {}
+}
+
+test {
+    useJUnitPlatform()
 }
 
 jar {
