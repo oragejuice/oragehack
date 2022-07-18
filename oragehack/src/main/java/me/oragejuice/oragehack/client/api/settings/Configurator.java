@@ -1,6 +1,7 @@
 package me.oragejuice.oragehack.client.api.settings;
 
 import me.oragejuice.oragehack.Oragehack;
+import me.oragejuice.oragehack.client.api.INameable;
 import me.oragejuice.oragehack.client.api.feature.Feature;
 
 import java.io.File;
@@ -16,7 +17,6 @@ public class Configurator {
     private final File configFile = new File("oragehack/config.yaml");
     FileWriter fw;
 
-    ArrayList<ISubSetting> subNodes = new ArrayList<>();
 
     public void save(){
 
@@ -61,91 +61,46 @@ public class Configurator {
         validateFolder();
         validateFile();
 
+        ArrayList<ISubSetting> subNodes = new ArrayList<>();
         try {
-            Scanner reader = new Scanner(configFile);
-            Feature lastFeature = null;
-            GenericSetting lastSetting = null;
-            String lastline = "";
-            String[] v;
-            while (reader.hasNextLine()){
-                String data = reader.nextLine();
-
-                //this regex should Match for when there are no leading Tabs and it ends in a colon, to find Feature names
-                if(data.matches("^[^\\u0009]*:$")){
-                    lastFeature = Oragehack.INSTANCE.featureManager.getFeatureByName(data.replace(":", ""));
-                    subNodes.clear();
-                    subNodes.add(lastFeature);
+            Scanner scanner = new Scanner(configFile);
+            String line = "";
+            int tabs = 0;
+            int lastTab = 0;
+            while(scanner.hasNextLine()){
+                line = scanner.nextLine();
+                tabs = countTabs(line);
+                if(tabs == 0) {
+                    //then this is not a setting but a feature
+                    Feature f = Oragehack.INSTANCE.featureManager.getFeatureByName(line.replace(":", ""));
+                    subNodes.clear(); // we dont need to remmeber all previous settngs
+                    subNodes.add(f);
                 } else {
-                    //If somehow the last feature ended up being null or something
-                    if(lastFeature == null){
-                        Oragehack.LOGGER.info("feature was null");
-                        continue;
-                    }
 
-                    //if the line could likely be a setting
-                    if(data.contains(":") && data.startsWith("\u0009")){
-                        switch (isChildOf(lastline, data)){
-
-                            //is a child of last setting
-                            //e.g
-                            //-thing: true
-                            //--new_thing: 1.0
-                            case (1):
-                                //in a feature
-                                v = data.replace("\t", "").split(":");
-                                if(subNodes.size() < 2){
-                                    GenericSetting s = getSettingByName(subNodes.get(0).getSettings(), v[0]);
-                                    if(s == null) {
-                                        Oragehack.LOGGER.info("You fucked up L");
-                                        continue;
-                                    }
-                                    s.setValue(v[1]);
-                                } else {
-                                    //sub setting (child of another setting)
-                                    subNodes.add(lastSetting);
-
-                                    GenericSetting s = getSettingByName(subNodes.get(subNodes.size()-1).getSettings(), v[0]);
-                                    if(s == null) {
-                                        Oragehack.LOGGER.info("{} wasnt able to load case(1)", v[0]);
-                                        continue;
-                                    }
-                                    s.setValue(v[1]);
-                                }
-
-                                break;
-
-                            //is a child of parent node
-                            //e.g
-                            // -thing: true
-                            // -otherThing: 1.0
-                            case (0):
-                                v = data.replace("\t", "").split(":");
-                                GenericSetting s = getSettingByName(subNodes.get(subNodes.size()-1).getSettings(), v[0]);
-                                if(s == null) {
-                                    Oragehack.LOGGER.info("{} wasnt able to load case(0)", v[0]);
-                                    continue;
-                                }
-                                s.setValue(v[1]);
-                                break;
-
-                            //is a parent node
-                            case (-1):
-                                subNodes.remove(subNodes.size()-1);
-                                v = data.replace("\t", "").split(":");
-                                s = getSettingByName(subNodes.get(subNodes.size()-1).getSettings(), v[0]);
-                                if(s == null) {
-                                    Oragehack.LOGGER.info("{} wasnt able to load case(-1)", v[0]);
-                                    continue;
-                                }
-                                s.setValue(v[1]);
-                                break;
+                    if(tabs - lastTab < 0){
+                        for (int i = 0; i < lastTab - tabs; i++) {
+                            subNodes.remove(subNodes.size()-1);
                         }
-
-
                     }
+
+                    String[] data = line.replace("\t", "").split(":");
+                    GenericSetting s = getSettingByName(subNodes.get(subNodes.size()-1).getSettings(), data[0]);
+                    if(s != null){
+                        // was able to find setting in from the top of the subnode stack
+                        Oragehack.LOGGER.info("able find setting {} - parent {}", data[0], ((INameable) subNodes.get(subNodes.size()-1)).getName());
+
+                        //as it has children it must be added to stack
+                        if(!s.getSettings().isEmpty()){
+                            subNodes.add(s);
+                        }
+                    } else {
+                        Oragehack.LOGGER.info("Couldnt find setting {} - parent {}", data[0], ((INameable) subNodes.get(subNodes.size()-1)).getName());
+                    }
+
                 }
-                lastline = data;
+                lastTab = tabs;
             }
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -172,16 +127,6 @@ public class Configurator {
 
     private void writeline(String message) throws IOException {
         fw.write(message + "\n");
-    }
-
-    /*
-    if returns 1 then it is a child
-    if returns 0 then is of same subset
-    if returns -1 then is escaping subsetting
-     */
-
-    private int isChildOf(String parent, String child){
-        return countTabs(child) - countTabs(parent) ;
     }
 
     private static GenericSetting getSettingByName(ArrayList<GenericSetting> features, String name){

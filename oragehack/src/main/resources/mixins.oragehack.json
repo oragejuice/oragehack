@@ -6,7 +6,6 @@
   ],
   "client": [
     "EntityPlayerSPMixin",
-    "GuiIngameMixin",
     "GuiNewChatMixin",
     "KeyBindingMixin",
     "MixinMinecraft"
