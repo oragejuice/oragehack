@@ -75,6 +75,7 @@ public class GenericSetting<T> implements INameable, ISubSetting {
     }
 
     public void setValue(String string){
+
         if(value instanceof Double){
             this.value = (T) Double.valueOf(string);
         } else if(value instanceof Float){
@@ -83,6 +84,11 @@ public class GenericSetting<T> implements INameable, ISubSetting {
             this.value = (T) Boolean.valueOf(string);
         }
         Oragehack.LOGGER.info("value set to: {} - {}", value, this.name);
+    }
+
+    @Override
+    public String toString(){
+        return this.name;
     }
 
 
