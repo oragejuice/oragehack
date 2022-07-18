@@ -39,6 +39,8 @@ public class Configurator {
 
         for (Feature feature : Oragehack.INSTANCE.featureManager.getFeatures()) {
             writeline(feature.getName() + ":");
+            writeline("\tenabled: " + feature.isEnabled());
+            writeline("\tkeybind: "+ feature.keybind);
 
             for (GenericSetting setting : feature.getSettings()) {
                 saveSetting("\t", setting);
@@ -82,13 +84,23 @@ public class Configurator {
                             subNodes.remove(subNodes.size()-1);
                         }
                     }
-
                     String[] data = line.replace("\t", "").split(":");
+
+                    //if the line is referencing a primitive setting of the feature
+                    if(subNodes.size() == 1 && data[0].matches("^(enabled:|disabled:)")){
+                        Feature f = (Feature) subNodes.get(0);
+                        if(line.contains("enabled")) {
+                            f.setEnabled(Boolean.valueOf(data[1].replace(" ", "")));
+                        } else{
+                            f.keybind = (Integer.valueOf(data[1].replace(" ", "")));
+                        }
+                        continue;
+                    }
+
+
                     GenericSetting s = getSettingByName(subNodes.get(subNodes.size()-1).getSettings(), data[0]);
                     if(s != null){
                         // was able to find setting in from the top of the subnode stack
-                        Oragehack.LOGGER.info("able find setting {} - parent {}", data[0], ((INameable) subNodes.get(subNodes.size()-1)).getName());
-
                         //as it has children it must be added to stack
                         if(!s.getSettings().isEmpty()){
                             subNodes.add(s);
@@ -131,7 +143,6 @@ public class Configurator {
 
     private static GenericSetting getSettingByName(ArrayList<GenericSetting> features, String name){
         for (GenericSetting feature : features) {
-            Oragehack.LOGGER.info("{} searching settings", feature.getName());
             if(feature.getName().equals(name)){
                 return feature;
             }

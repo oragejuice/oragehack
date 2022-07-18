@@ -4,6 +4,7 @@ import me.oragejuice.oragehack.client.api.settings.Configurator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.lwjgl.input.Keyboard;
 
 public class ConfigTest {
 
@@ -34,6 +35,12 @@ public class ConfigTest {
 
         String s2 = "\t\t\ttestBooleanSetting2: true";
         Assertions.assertEquals(Configurator.countTabs(s2), 3);
+    }
+
+    @Test
+    @DisplayName("keybaord")
+    public void getKey(){
+        Assertions.assertEquals(Keyboard.getKeyIndex("P"), 25);
     }
 
 
