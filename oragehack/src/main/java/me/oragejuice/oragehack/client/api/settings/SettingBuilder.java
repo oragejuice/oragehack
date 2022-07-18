@@ -25,8 +25,9 @@ public class SettingBuilder<T> {
     }
 
     public GenericSetting<T> setParent(GenericSetting parent) {
-        genericSetting.parent = parent;
+        parent.registerChild(genericSetting);
         return genericSetting;
     }
+
 
 }

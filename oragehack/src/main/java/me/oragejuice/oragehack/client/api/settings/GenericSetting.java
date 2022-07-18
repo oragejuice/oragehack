@@ -1,8 +1,11 @@
 package me.oragejuice.oragehack.client.api.settings;
 
+import me.oragejuice.oragehack.Oragehack;
 import me.oragejuice.oragehack.client.api.INameable;
 
-public class GenericSetting<T> implements INameable {
+import java.util.ArrayList;
+
+public class GenericSetting<T> implements INameable, ISubSetting {
 
     GenericSetting parent;
 
@@ -17,6 +20,9 @@ public class GenericSetting<T> implements INameable {
         this.name = name;
         this.value = value;
     }
+
+
+    private ArrayList<GenericSetting> childrenSettings = new ArrayList<GenericSetting>();
 
     public void map(SettingMonad operator){
         this.value = (T) operator.map(this).value;
@@ -48,6 +54,36 @@ public class GenericSetting<T> implements INameable {
         return max;
     }
 
+    public void setValue(T value){
+        this.value = value;
+    }
+
+    public void registerChild(GenericSetting... children){
+        for (GenericSetting child : children) {
+            childrenSettings.add(child);
+            child.parent = this;
+        }
+    }
+
+    public GenericSetting getParent() {
+        return parent;
+    }
+
+    @Override
+    public ArrayList<GenericSetting> getSettings() {
+        return childrenSettings;
+    }
+
+    public void setValue(String string){
+        if(value instanceof Double){
+            this.value = (T) Double.valueOf(string);
+        } else if(value instanceof Float){
+            this.value = (T) Float.valueOf(string);
+        } else if(value instanceof Boolean){
+            this.value = (T) Boolean.valueOf(string);
+        }
+        Oragehack.LOGGER.info("value set to: {} - {}", value, this.name);
+    }
 
 
 }

@@ -10,6 +10,9 @@ import me.oragejuice.eventbus.EventManager;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 
 class EventBusTest {
 
@@ -98,7 +101,7 @@ class EventBusTest {
 
     @Test
     @DisplayName("Opti Speed Test")
-    void speedOpti() throws NoSuchMethodException {
+    void speedOpti() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         //EventManager E = new EventManager();
        SpeedFeature s = new SpeedFeature();
         ASMListener a = new ASMListener(new SpeedFeature(), SpeedFeature.class.getMethod("onThing", TestEvent.class));
