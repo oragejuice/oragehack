@@ -28,8 +28,8 @@ public class Oragehack {
         eventBus.subscribe(bindingHandler);
 
         Configurator configurator = new Configurator();
-        configurator.save();
         configurator.load();
+        configurator.save();
     }
 
 
