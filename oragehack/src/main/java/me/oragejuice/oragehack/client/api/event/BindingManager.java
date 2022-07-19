@@ -3,7 +3,6 @@ package me.oragejuice.oragehack.client.api.event;
 import me.oragejuice.eventbus.EventHandler;
 import me.oragejuice.oragehack.Oragehack;
 import me.oragejuice.oragehack.client.api.feature.Feature;
-import me.oragejuice.oragehack.client.event.KeypressEvent;
 
 public class BindingManager {
 

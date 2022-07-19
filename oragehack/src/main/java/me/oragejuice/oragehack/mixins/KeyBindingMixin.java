@@ -1,7 +1,7 @@
 package me.oragejuice.oragehack.mixins;
 
 import me.oragejuice.oragehack.Oragehack;
-import me.oragejuice.oragehack.client.event.KeypressEvent;
+import me.oragejuice.oragehack.client.api.event.KeypressEvent;
 import net.minecraft.client.settings.KeyBinding;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

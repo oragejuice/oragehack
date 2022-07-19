@@ -1,7 +1,7 @@
 package me.oragejuice.oragehack.mixins;
 
 import me.oragejuice.oragehack.Oragehack;
-import me.oragejuice.oragehack.client.event.RenderOverlayEvent;
+import me.oragejuice.oragehack.client.api.event.RenderOverlayEvent;
 import net.minecraft.client.gui.GuiNewChat;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
