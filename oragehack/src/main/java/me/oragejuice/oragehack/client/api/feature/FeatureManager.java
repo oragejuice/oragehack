@@ -1,10 +1,8 @@
 package me.oragejuice.oragehack.client.api.feature;
 
 import me.oragejuice.oragehack.Oragehack;
-import me.oragejuice.oragehack.client.features.testFeature.TestFeature;
-import me.oragejuice.oragehack.client.features.testFeature.TickListener;
-import me.oragejuice.oragehack.client.features.watermark.Watermark;
-import org.lwjgl.input.Keyboard;
+import me.oragejuice.oragehack.client.features.modules.testFeature.TestFeature;
+import me.oragejuice.oragehack.client.features.modules.watermark.Watermark;
 
 import java.util.ArrayList;
 

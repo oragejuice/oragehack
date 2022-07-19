@@ -1,4 +1,4 @@
-package me.oragejuice.oragehack.client.event;
+package me.oragejuice.oragehack.client.api.event;
 
 public class KeypressEvent {
 

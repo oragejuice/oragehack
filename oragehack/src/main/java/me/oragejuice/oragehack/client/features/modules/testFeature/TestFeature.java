@@ -1,6 +1,5 @@
-package me.oragejuice.oragehack.client.features.testFeature;
+package me.oragejuice.oragehack.client.features.modules.testFeature;
 
-import me.oragejuice.eventbus.EventHandler;
 import me.oragejuice.oragehack.client.api.feature.Feature;
 import me.oragejuice.oragehack.client.api.settings.GenericSetting;
 import me.oragejuice.oragehack.client.api.settings.SettingBuilder;

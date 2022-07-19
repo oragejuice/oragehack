@@ -1,9 +1,9 @@
-package me.oragejuice.oragehack.client.features.watermark;
+package me.oragejuice.oragehack.client.features.modules.watermark;
 
 import me.oragejuice.eventbus.EventHandler;
 import me.oragejuice.oragehack.client.api.feature.Feature;
 import me.oragejuice.oragehack.client.api.settings.GenericSetting;
-import me.oragejuice.oragehack.client.event.RenderOverlayEvent;
+import me.oragejuice.oragehack.client.api.event.RenderOverlayEvent;
 
 import java.awt.*;
 

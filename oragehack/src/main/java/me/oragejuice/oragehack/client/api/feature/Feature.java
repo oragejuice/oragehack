@@ -8,7 +8,7 @@ import me.oragejuice.oragehack.client.api.INameable;
 import me.oragejuice.oragehack.client.api.IListener;
 import me.oragejuice.oragehack.client.api.settings.GenericSetting;
 import me.oragejuice.oragehack.client.api.settings.ISubSetting;
-import me.oragejuice.oragehack.client.event.KeypressEvent;
+import me.oragejuice.oragehack.client.api.event.KeypressEvent;
 import org.lwjgl.input.Keyboard;
 
 import javax.annotation.Nonnull;

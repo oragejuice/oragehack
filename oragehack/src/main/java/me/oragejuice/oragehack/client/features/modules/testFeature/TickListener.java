@@ -1,10 +1,9 @@
-package me.oragejuice.oragehack.client.features.testFeature;
+package me.oragejuice.oragehack.client.features.modules.testFeature;
 
-import com.google.common.eventbus.Subscribe;
 import me.oragejuice.eventbus.EventHandler;
 import me.oragejuice.oragehack.Oragehack;
 import me.oragejuice.oragehack.client.api.IListener;
-import me.oragejuice.oragehack.client.event.PlayerUpdateEvent;
+import me.oragejuice.oragehack.client.api.event.PlayerUpdateEvent;
 import net.minecraft.client.Minecraft;
 
 public class TickListener implements IListener {
