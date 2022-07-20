@@ -51,15 +51,11 @@ public class ArgumentNode {
     public String[] getSuggestions(String[] args){
         String[] matches = new String[]{};
         //if matches then this argument is valid
-        //System.out.println("args length: " + args.length);
         if(matches(args[depth])){
             for (ArgumentNode child : children) {
-               // System.out.println("child suggestions called " + child.regex + " from: " + this.regex);
                 if((child.depth < args.length)) {
-                    //System.out.println("depth smaller than args length");
                     matches = concatWithArrayCopy(matches, child.getSuggestions(args));
                 } else {
-                    //System.out.println("depth greater than args length");
                     matches = concatWithArrayCopy(matches, child.getSuggestions());
                 }
             }

@@ -12,7 +12,6 @@ public class GenericSetting<T> implements INameable, ISubSetting {
     String name;
     T value;
 
-    // for values that need ranges set
     T min;
     T max;
 
@@ -21,13 +20,11 @@ public class GenericSetting<T> implements INameable, ISubSetting {
         this.value = value;
     }
 
-
     private ArrayList<GenericSetting> childrenSettings = new ArrayList<GenericSetting>();
 
     public void map(SettingMonad operator){
         this.value = (T) operator.map(this).value;
     }
-
 
     public void setMax(T max) {
         this.max = max;
@@ -90,6 +87,5 @@ public class GenericSetting<T> implements INameable, ISubSetting {
     public String toString(){
         return this.name;
     }
-
 
 }
