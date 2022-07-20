@@ -3,12 +3,14 @@
   "package": "me.oragejuice.oragehack.mixins",
   "refmap": "mixins.oragehack.refmap.json",
   "mixins": [
+    "gui.GuiTextFieldAccessor"
   ],
   "client": [
-    "EntityPlayerSPMixin",
-    "GuiNewChatMixin",
     "KeyBindingMixin",
-    "MixinMinecraft"
+    "MinecraftMixin",
+    "entity.EntityPlayerSPMixin",
+    "gui.GuiNewChatMixin",
+    "gui.GuiTextFieldMixin"
   ],
   "server": []
 }

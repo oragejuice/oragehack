@@ -1,4 +1,4 @@
-package me.oragejuice.oragehack.mixins;
+package me.oragejuice.oragehack.mixins.entity;
 
 
 import me.oragejuice.oragehack.Oragehack;
@@ -18,13 +18,12 @@ public abstract class EntityPlayerSPMixin {
         Oragehack.INSTANCE.eventBus.post(new PlayerUpdateEvent());
     }
 
-    @Inject(method = "sendChatMessage", at = @At("HEAD"))
+    @Inject(method = "sendChatMessage", at = @At("HEAD"), cancellable = true)
     public void onChatSend(String message, CallbackInfo ci){
         if(message.startsWith(";")) {
-            Oragehack.LOGGER.info("COMMAND DISPATCHED");
-            return;
+            Oragehack.INSTANCE.commandDispatcher.dispatch(message.replace(";", ""));
+            ci.cancel();
         }
-
     }
 
 }

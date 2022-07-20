@@ -7,7 +7,6 @@ public class Config {
 
     ArgumentNode save = new ArgumentNode("(?i)save", new String[]{"save"}, 1,
             ((String[] s) -> {
-                System.out.println("COMMAND EXECUTED!");
                 Oragehack.INSTANCE.configurator.save();
             }));
 

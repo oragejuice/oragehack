@@ -31,6 +31,11 @@ public abstract class Feature implements IListener, INameable, Globals, ISubSett
         Oragehack.INSTANCE.featureManager.registerFeature(this);
     }
 
+    protected void onEnable(){};
+
+    protected void onDisable(){};
+
+
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
         if(listeners == null) return;
@@ -38,10 +43,12 @@ public abstract class Feature implements IListener, INameable, Globals, ISubSett
             for (IListener listener : listeners) {
                 Oragehack.INSTANCE.eventBus.subscribe(listener);
             }
+            onEnable();
         } else {
             for (IListener listener : listeners) {
                 Oragehack.INSTANCE.eventBus.unsubscribe(listener);
             }
+            onDisable();
         }
     }
 

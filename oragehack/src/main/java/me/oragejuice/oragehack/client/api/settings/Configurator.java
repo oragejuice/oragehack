@@ -15,7 +15,7 @@ public class Configurator {
 
     private final File mainDirectory = new File("oragehack/");
     private final File configFile = new File("oragehack/config.yaml");
-    FileWriter fw;
+    static FileWriter fw;
 
 
     public void save(){
@@ -25,7 +25,7 @@ public class Configurator {
         validateFile();
 
         try {
-            this.fw = new FileWriter(configFile);
+            this.fw = new FileWriter(configFile, false);
             this.generateFeatureConfig();
             fw.close();
         } catch (IOException e) {
@@ -36,7 +36,6 @@ public class Configurator {
     private void generateFeatureConfig() throws IOException {
 
         if(Oragehack.INSTANCE.featureManager.getFeatures().isEmpty()) Oragehack.LOGGER.info("FEATURES ARE EMPTY");
-
         for (Feature feature : Oragehack.INSTANCE.featureManager.getFeatures()) {
             writeline(feature.getName() + ":");
             writeline("\tenabled: " + feature.isEnabled());
@@ -87,7 +86,7 @@ public class Configurator {
                     String[] data = line.replace("\t", "").split(":");
 
                     //if the line is referencing a primitive setting of the feature
-                    if(subNodes.size() == 1 && data[0].matches("^(enabled:|disabled:)")){
+                    if(subNodes.size() == 1 && data[0].matches("^(enabled|keybind)")){
                         Feature f = (Feature) subNodes.get(0);
                         if(line.contains("enabled")) {
                             f.setEnabled(Boolean.valueOf(data[1].replace(" ", "")));
@@ -95,18 +94,18 @@ public class Configurator {
                             f.keybind = (Integer.valueOf(data[1].replace(" ", "")));
                         }
                         continue;
-                    }
-
-
-                    GenericSetting s = getSettingByName(subNodes.get(subNodes.size()-1).getSettings(), data[0]);
-                    if(s != null){
-                        // was able to find setting in from the top of the subnode stack
-                        //as it has children it must be added to stack
-                        if(!s.getSettings().isEmpty()){
-                            subNodes.add(s);
-                        }
                     } else {
-                        Oragehack.LOGGER.info("Couldnt find setting {} - parent {}", data[0], ((INameable) subNodes.get(subNodes.size()-1)).getName());
+
+                        GenericSetting s = getSettingByName(subNodes.get(subNodes.size() - 1).getSettings(), data[0]);
+                        if (s != null) {
+                            // was able to find setting in from the top of the subnode stack
+                            //as it has children it must be added to stack
+                            if (!s.getSettings().isEmpty()) {
+                                subNodes.add(s);
+                            }
+                        } else {
+                            Oragehack.LOGGER.info("Couldnt find setting {} - parent {}", data[0], ((INameable) subNodes.get(subNodes.size() - 1)).getName());
+                        }
                     }
 
                 }
@@ -130,7 +129,7 @@ public class Configurator {
         if(!configFile.exists()){
             Oragehack.LOGGER.info("File didn't exist, creating!");
             try {
-                mainDirectory.createNewFile();
+                configFile.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
             }

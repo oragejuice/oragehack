@@ -1,4 +1,4 @@
-package me.oragejuice.oragehack.mixins;
+package me.oragejuice.oragehack.mixins.gui;
 
 import me.oragejuice.oragehack.Oragehack;
 import me.oragejuice.oragehack.client.api.event.RenderOverlayEvent;
@@ -10,6 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(GuiNewChat.class)
 public abstract class GuiNewChatMixin {
+
 
     @Inject(method = "drawChat", at = @At("HEAD"))
     public void drawChat(int updateCounter, CallbackInfo ci){
