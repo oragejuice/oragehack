@@ -20,6 +20,7 @@ public class CommandDispatcher {
 
     public String[] getSuggestion(String command){
         String[] arguments = command.split(" ");
+        //System.out.println("arguments length: " + arguments.length);
         String[] matches = new String[]{};
         for (ArgumentNode argumentNode : commands) {
             matches = concatWithArrayCopy(matches, argumentNode.getSuggestions(arguments));

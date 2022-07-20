@@ -55,10 +55,15 @@ public class CommandTester {
     void a(){
         CommandDispatcher cd = new CommandDispatcher();
 
-        ArgumentNode save = new ArgumentNode("(?i)save", new String[]{"save"}, 1,
-                ((String[] s) -> {
-                    System.out.println("SAVED!");
-                }));
+        ArgumentNode foo = new ArgumentNode("(?i)foo", new String[]{"foo"}, 2, ((String[] s) -> {
+            System.out.println("FOO!");
+        }));
+
+        ArgumentNode bar = new ArgumentNode("(?i)bar", new String[]{"bar"}, 2, ((String[] s) -> {
+            System.out.println("BAR!");
+        }));
+
+        ArgumentNode save = new ArgumentNode("(?i)save", new String[]{"save"}, 1, foo, bar);
 
         ArgumentNode load = new ArgumentNode("(?i)load", new String[]{"load"}, 1,
                 ((String[] s) -> {
@@ -76,6 +81,11 @@ public class CommandTester {
         System.out.println("TEST 2");
         String command2 = "conf";
         for (String s : cd.getSuggestion(command2)) {
+            System.out.println(s);
+        }
+        System.out.println("TEST 3");
+        String command3 = "config save";
+        for (String s : cd.getSuggestion(command3)) {
             System.out.println(s);
         }
     }

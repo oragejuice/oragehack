@@ -51,11 +51,15 @@ public class ArgumentNode {
     public String[] getSuggestions(String[] args){
         String[] matches = new String[]{};
         //if matches then this argument is valid
+        //System.out.println("args length: " + args.length);
         if(matches(args[depth])){
             for (ArgumentNode child : children) {
-                if(!(child.depth >= args.length)) {
+               // System.out.println("child suggestions called " + child.regex + " from: " + this.regex);
+                if((child.depth < args.length)) {
+                    //System.out.println("depth smaller than args length");
                     matches = concatWithArrayCopy(matches, child.getSuggestions(args));
                 } else {
+                    //System.out.println("depth greater than args length");
                     matches = concatWithArrayCopy(matches, child.getSuggestions());
                 }
             }
@@ -63,7 +67,7 @@ public class ArgumentNode {
         } //Invalid argument at this depth, return filtered list of given suggestions
         else {
             for (String suggestion : suggestions) {
-                if (DamerauLevenshtein.calculate(suggestion, args[depth]) < 3 || suggestion.toLowerCase().contains(args[depth].toLowerCase())) {
+                if (DamerauLevenshtein.calculate(suggestion, args[depth]) < 2 || suggestion.toLowerCase().contains(args[depth].toLowerCase())) {
                     matches = concatWithArrayCopy(matches, new String[]{suggestion});
                 }
             }
