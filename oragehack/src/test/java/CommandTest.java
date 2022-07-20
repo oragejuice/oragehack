@@ -6,6 +6,7 @@ public class CommandTest {
 
     Oragehack oragehack = new Oragehack();
 
+
     @Test
     @DisplayName("command dispatched")
     void a(){
@@ -16,7 +17,9 @@ public class CommandTest {
     @Test
     @DisplayName("command sugges")
     void b(){
-        Oragehack.INSTANCE.init();
-        Oragehack.INSTANCE.commandDispatcher.dispatch("config save");
+        //Oragehack.INSTANCE.init();
+        for (String s : Oragehack.INSTANCE.commandDispatcher.getSuggestion("config sa")) {
+            System.out.println("suggestion: " + s);
+        }
     }
 }
