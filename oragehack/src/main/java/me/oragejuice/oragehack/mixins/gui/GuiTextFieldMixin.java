@@ -113,13 +113,20 @@ public abstract class GuiTextFieldMixin {
     @Inject(method = {"textboxKeyTyped"}, at = @At("RETURN"))
     public void textBoxKeyTypedHook(char typedChar, int keyCode, CallbackInfoReturnable<Boolean> cir){
         if(text.startsWith("`")){
+            String[] s = new String[]{};
             String command = text.replaceFirst("`", "");
             int i = text.lastIndexOf(" ");
             if(i != -1){
                 // space found, must be multiple words
                 Oragehack.LOGGER.info("text: {} \t index: {} \t subString: {}", text, i, text.substring(0,i));
+                s = Oragehack.INSTANCE.commandDispatcher.getSuggestion(command);
+                spacing = Minecraft.getMinecraft().fontRenderer.getStringWidth("`" + text.substring(0,i));
             } else {
-
+                s = Oragehack.INSTANCE.commandDispatcher.getSuggestion(command);
+                spacing = Minecraft.getMinecraft().fontRenderer.getStringWidth("`");
+            }
+            if (s.length > 0){
+                suggestions = s[0];
             }
         }
     }
