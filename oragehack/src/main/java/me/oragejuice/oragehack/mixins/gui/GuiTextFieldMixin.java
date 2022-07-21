@@ -65,7 +65,7 @@ public abstract class GuiTextFieldMixin {
             {
                 String s1 = flag ? s.substring(0, j) : s;
 
-                Minecraft.getMinecraft().fontRenderer.drawStringWithShadow(suggestions, l + spacing, (float)i1, Color.ORANGE.getRGB());
+                Minecraft.getMinecraft().fontRenderer.drawStringWithShadow(suggestions, l + spacing, (float)i1, Color.DARK_GRAY.getRGB());
             }
 
         }
@@ -93,7 +93,7 @@ public abstract class GuiTextFieldMixin {
             }
         }
 
-        /* TODO tab completion for tabs
+        /* TODO tab completion for suggestions
         if(keyCode == Keyboard.KEY_TAB){
             i = text.lastIndexOf(" ");
             if(!suggestions.isEmpty() && i != -1){

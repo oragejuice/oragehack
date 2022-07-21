@@ -12,7 +12,7 @@ public class CommandTester {
 
         Assertions.assertTrue("heLP".matches("(?i)^Help"));
 
-        Assertions.assertTrue("heLP".matches(".*"));
+        Assertions.assertTrue("Terminal".matches("(?i)(TestFeature|Watermark|Terminal|)"));
 
 
         ArgumentNode secondaryNode = new ArgumentNode("123", new String[]{"123","132","421"}, 1);

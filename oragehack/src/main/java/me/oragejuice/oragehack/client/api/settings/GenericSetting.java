@@ -66,6 +66,10 @@ public class GenericSetting<T> implements INameable, ISubSetting {
         return parent;
     }
 
+    public boolean hasParent(){
+        return this.parent != null;
+    }
+
     @Override
     public ArrayList<GenericSetting> getSettings() {
         return childrenSettings;
@@ -86,6 +90,14 @@ public class GenericSetting<T> implements INameable, ISubSetting {
     @Override
     public String toString(){
         return this.name;
+    }
+
+    public String getFullyQualifiedName(){
+        if(hasParent()){
+            return parent.getFullyQualifiedName() + "." + this.name;
+        } else {
+            return name;
+        }
     }
 
 }

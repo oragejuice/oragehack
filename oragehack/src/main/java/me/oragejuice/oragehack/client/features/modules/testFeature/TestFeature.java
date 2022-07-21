@@ -11,6 +11,7 @@ public class TestFeature extends Feature {
     GenericSetting<Boolean> otherBooleanSetting = new GenericSetting<>("testBooleanSetting2", true);
     GenericSetting<Float> floatSetting = new SettingBuilder<Float>("floatSetting", 1.0f).setParent(otherBooleanSetting);
     GenericSetting<Float> otherFloatSetting = new SettingBuilder<Float>("otherFloatSetting", 2.0F).setParent(otherBooleanSetting);
+    GenericSetting<Float> subSubSubSettingFloat = new SettingBuilder<Float>("subSubSetting", 3.0F).setParent(floatSetting);
 
 
 
