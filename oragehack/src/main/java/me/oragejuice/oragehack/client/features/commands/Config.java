@@ -15,7 +15,7 @@ public class Config {
                 Oragehack.INSTANCE.configurator.load();
             }));
 
-    ArgumentNode config = new ArgumentNode("(?i)^config$", new String[]{"config"}, 0, save, load);
+    ArgumentNode config = new ArgumentNode("(?i)config", new String[]{"config"}, 0, save, load);
 
 
     public Config() {

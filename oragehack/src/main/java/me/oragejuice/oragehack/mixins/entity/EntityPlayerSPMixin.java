@@ -20,8 +20,8 @@ public abstract class EntityPlayerSPMixin {
 
     @Inject(method = "sendChatMessage", at = @At("HEAD"), cancellable = true)
     public void onChatSend(String message, CallbackInfo ci){
-        if(message.startsWith(";")) {
-            Oragehack.INSTANCE.commandDispatcher.dispatch(message.replace(";", ""));
+        if(message.startsWith("`")) {
+            Oragehack.INSTANCE.commandDispatcher.dispatch(message.replaceFirst("`", ""));
             ci.cancel();
         }
     }

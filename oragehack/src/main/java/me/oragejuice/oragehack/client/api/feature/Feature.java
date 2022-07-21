@@ -20,9 +20,11 @@ public abstract class Feature implements IListener, INameable, Globals, ISubSett
     private IListener[] listeners;
     private boolean enabled = false;
 
-
-
     private final ArrayList<GenericSetting> settings = new ArrayList<GenericSetting>();
+
+
+
+    private final ArrayList<GenericSetting> flattenedSettings = new ArrayList<GenericSetting>();
 
 
     public Feature(String name, IListener... listeners) {
@@ -86,6 +88,7 @@ public abstract class Feature implements IListener, INameable, Globals, ISubSett
     protected void registerSettings(@Nonnull GenericSetting... settings){
         for (GenericSetting setting : settings) {
             this.settings.add(setting);
+            registerFlattenedSetting(setting);
         }
     }
 
@@ -102,6 +105,20 @@ public abstract class Feature implements IListener, INameable, Globals, ISubSett
         }
         return null;
     }
+
+    public ArrayList<GenericSetting> getFlattenedSettings() {
+        return flattenedSettings;
+    }
+
+    private void registerFlattenedSetting(GenericSetting setting){
+        Oragehack.LOGGER.info("Saving to flattened: {}", setting.getName());
+        this.flattenedSettings.add(setting);
+        for (Object subSetting : setting.getSettings()) {
+            registerFlattenedSetting((GenericSetting) subSetting);
+        }
+
+    }
+
 
 
 }
