@@ -74,6 +74,10 @@ public class Configurator {
                 if(tabs == 0) {
                     //then this is not a setting but a feature
                     Feature f = Oragehack.INSTANCE.featureManager.getFeatureByName(line.replace(":", ""));
+                    if(f == null){
+                        Oragehack.LOGGER.error("{} Module not found! please remove from your config file!", line);
+                        continue;
+                    }
                     subNodes.clear(); // we dont need to remmeber all previous settngs
                     subNodes.add(f);
                 } else {

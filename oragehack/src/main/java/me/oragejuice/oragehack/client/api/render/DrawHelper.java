@@ -7,6 +7,7 @@ import java.awt.*;
 
 //TODO learn openGL
 public class DrawHelper {
+
     private static void applyColor(Color color) {
         GL11.glColor4f(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, color.getAlpha() / 255f);
     }
@@ -141,7 +142,6 @@ public class DrawHelper {
         GlStateManager.disableBlend();
         GlStateManager.enableTexture2D();
         GlStateManager.enableCull();
-        //GlStateManager.color(1f, 1f, 1f,1f);
     }
 
 }

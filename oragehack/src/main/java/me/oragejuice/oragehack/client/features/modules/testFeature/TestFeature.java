@@ -1,5 +1,6 @@
 package me.oragejuice.oragehack.client.features.modules.testFeature;
 
+import me.oragejuice.oragehack.client.api.feature.Categories;
 import me.oragejuice.oragehack.client.api.feature.Feature;
 import me.oragejuice.oragehack.client.api.settings.GenericSetting;
 import me.oragejuice.oragehack.client.api.settings.SettingBuilder;
@@ -16,7 +17,7 @@ public class TestFeature extends Feature {
 
 
     public TestFeature() {
-        super("TestFeature", new TickListener());
+        super("Test Feature", Categories.CLIENT, new TickListener());
         this.keybind = Keyboard.KEY_N;
         this.registerSettings(otherBooleanSetting, booleanSetting);
     }

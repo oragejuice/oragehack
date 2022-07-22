@@ -1,6 +1,7 @@
 package me.oragejuice.oragehack.client.api.feature;
 
 import me.oragejuice.oragehack.Oragehack;
+import me.oragejuice.oragehack.client.features.modules.clickGui.ClickGuiFeature;
 import me.oragejuice.oragehack.client.features.modules.testFeature.TestFeature;
 import me.oragejuice.oragehack.client.features.modules.watermark.Watermark;
 
@@ -12,10 +13,12 @@ public class FeatureManager {
 
     public TestFeature testFeature;
     public Watermark watermark;
+    public ClickGuiFeature clickGuiFeature;
 
     public void init() {
         testFeature = new TestFeature();
         watermark = new Watermark();
+        clickGuiFeature = new ClickGuiFeature();
 
 
         for (Feature feature : features) {
@@ -25,6 +28,17 @@ public class FeatureManager {
 
     public ArrayList<Feature> getFeatures(){
         return this.features;
+    }
+
+    //Can return null
+    public ArrayList<Feature> getFeature(Categories category){
+        ArrayList<Feature> ret = new ArrayList<>();
+        for (Feature feature : features) {
+            if(feature.getCategory() == (category)){
+                 ret.add(feature);
+            }
+        }
+        return ret;
     }
 
     //Can return null
