@@ -9,6 +9,7 @@
     "KeyBindingMixin",
     "MinecraftMixin",
     "entity.EntityPlayerSPMixin",
+    "gui.GuiChatMixin",
     "gui.GuiNewChatMixin",
     "gui.GuiTextFieldMixin"
   ],

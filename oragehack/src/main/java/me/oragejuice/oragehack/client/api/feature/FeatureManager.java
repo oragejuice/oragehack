@@ -1,7 +1,6 @@
 package me.oragejuice.oragehack.client.api.feature;
 
 import me.oragejuice.oragehack.Oragehack;
-import me.oragejuice.oragehack.client.features.modules.terminal.Terminal;
 import me.oragejuice.oragehack.client.features.modules.testFeature.TestFeature;
 import me.oragejuice.oragehack.client.features.modules.watermark.Watermark;
 
@@ -13,12 +12,10 @@ public class FeatureManager {
 
     public TestFeature testFeature;
     public Watermark watermark;
-    public Terminal terminal;
 
     public void init() {
         testFeature = new TestFeature();
         watermark = new Watermark();
-        terminal = new Terminal();
 
 
         for (Feature feature : features) {
