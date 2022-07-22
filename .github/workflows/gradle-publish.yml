@@ -3,8 +3,7 @@ name: Gradle Package
 on:
   push:
   pull_request:
-  release:
-    types: [created]
+
 
 jobs:
   build:
