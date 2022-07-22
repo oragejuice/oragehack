@@ -116,8 +116,8 @@ dependencies {
     shade ('net.minecraft:launchwrapper:1.12')
     //shade ('me.oragejuice.eventbus:nukerbus:1.0')
     //shade ('me.oragejuice.commandDispatcher:CommandDispatcher:unspecified')
-    shade ( project(':nukerbus'))
-    shade ( project(':CommandDispatcher'))
+    //shade ( project(':nukerbus'))
+    //shade ( project(':CommandDispatcher'))
 
     shade ('org.spongepowered:mixin:0.7.11-SNAPSHOT')
     {
