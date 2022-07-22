@@ -20,6 +20,12 @@ public abstract class Feature implements IListener, INameable, Globals, ISubSett
     private IListener[] listeners;
     private boolean enabled = false;
 
+    public Categories getCategory() {
+        return category;
+    }
+
+    private final Categories category;
+
     private final ArrayList<GenericSetting> settings = new ArrayList<GenericSetting>();
 
 
@@ -27,9 +33,10 @@ public abstract class Feature implements IListener, INameable, Globals, ISubSett
     private final ArrayList<GenericSetting> flattenedSettings = new ArrayList<GenericSetting>();
 
 
-    public Feature(String name, IListener... listeners) {
+    public Feature(String name, Categories category, IListener... listeners) {
         this.listeners = listeners;
         this.name = name;
+        this.category = category;
         Oragehack.INSTANCE.featureManager.registerFeature(this);
     }
 
