@@ -81,7 +81,7 @@ public abstract class GuiTextFieldMixin {
             i = text.lastIndexOf(" ");
             if(i != -1){
                 // space found, must be multiple words
-                Oragehack.LOGGER.info("text: {} \t index: {} \t subString: {}", text, i, text.substring(0,i));
+                //Oragehack.LOGGER.info("text: {} \t index: {} \t subString: {}", text, i, text.substring(0,i));
                 s = Oragehack.INSTANCE.commandDispatcher.getSuggestion(command);
                 spacing = Minecraft.getMinecraft().fontRenderer.getStringWidth("`" + text.substring(0,i)) + 1;
             } else {
