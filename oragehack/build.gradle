@@ -3,6 +3,7 @@ buildscript {
         maven { url = 'https://files.minecraftforge.net/maven' }
         maven { url = "https://repo.spongepowered.org/maven" }
         maven { url = 'https://maven.minecraftforge.net' }
+        maven { url = 'https://files.minecraftforge.net/' }
         jcenter()
         mavenCentral()
     }
@@ -48,6 +49,9 @@ repositories {
     maven { url = 'https://files.minecraftforge.net/maven' }
     maven { url = 'https://maven.minecraftforge.net' }
     maven { url = 'https://repo.spongepowered.org/maven' }
+    maven { url = 'https://files.minecraftforge.net/' }
+    jcenter()
+    mavenCentral()
 }
 
 configurations {
