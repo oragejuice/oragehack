@@ -8,15 +8,20 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:3.+'
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
         classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
     }
+}
+
+plugins {
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'java'
 }
 
 apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 apply plugin: 'org.spongepowered.mixin'
-apply plugin: 'eclipse'
+
 
 version = mod_version
 group = mod_group
@@ -50,6 +55,7 @@ repositories {
     maven { url = 'https://maven.minecraftforge.net' }
     maven { url = 'https://repo.spongepowered.org/maven' }
     maven { url = 'https://files.minecraftforge.net/' }
+    maven { url = 'https://libraries.minecraft.net/' }
     jcenter()
     mavenCentral()
 }
@@ -65,16 +71,12 @@ dependencies {
     
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
-     // compileOnly 'me.oragejuice:processor:1.0'
-    //annotationProcessor 'me.oragejuice:processor:1.0'
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
-    implementation 'net.minecraft:launchwrapper:1.12'
-    //shade ('me.oragejuice.eventbus:nukerbus:1.0')
-    //shade ('me.oragejuice.commandDispatcher:CommandDispatcher:unspecified')
-    implementation project(':nukerbus')
-    implementation project(':CommandDispatcher')
+    shade 'net.minecraft:launchwrapper:1.12'
+    shade project(':nukerbus')
+    shade project(':CommandDispatcher')
 
-    embed('org.spongepowered:mixin:0.8.3-SNAPSHOT') {
+    shade('org.spongepowered:mixin:0.7.11-SNAPSHOT') {
         exclude module: 'guava'
         exclude module: 'commons-io'
         exclude module: 'gson'
@@ -96,6 +98,7 @@ processResources {
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
+    duplicatesStrategy = 'include'
 }
 
 mixin {
