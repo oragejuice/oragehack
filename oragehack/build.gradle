@@ -1,152 +1,115 @@
 buildscript {
     repositories {
-        maven { url "https://plugins.gradle.org/m2/" }
         maven { url = 'https://maven.minecraftforge.net' }
         maven { url = "https://repo.spongepowered.org/maven" }
         jcenter()
         mavenCentral()
     }
     dependencies {
-        //classpath "gradle.plugin.net.minecraftforge.gradle:ForgeGradle:2.0.2"
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath 'net.minecraftforge.gradle:ForgeGradle:3.+'
         classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
     }
 }
 
-plugins {
-    id 'com.github.johnrengelman.shadow' version '7.1.2'
-    id 'java'
-}
-
-//apply plugin: "net.minecraftforge.gradle.tweaker-client"
 apply plugin: 'net.minecraftforge.gradle'
+// Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'eclipse'
 
-group 'me.oragejuice.oragehack'
-version '1.0'
+version = mod_version
+group = mod_group
+archivesBaseName = mod_id
 
-sourceCompatibility = targetCompatibility = 1.8
-compileJava {
-    sourceCompatibility = targetCompatibility = 1.8
-}
+sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
 minecraft {
-    //mappings channel: mappings_channel, version: mappings_version
-    mappings channel: 'snapshot', version: '20180814-1.12'
+    mappings channel: mappings_channel, version: mappings_version
+    // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
+    // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
     runs {
         client {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
+            property 'fml.coreMods.load', mod_core_plugin.replace('${mod_group}', mod_group).replace('${mod_id}', mod_id)
         }
 
         server {
+            property 'fml.coreMods.load', mod_core_plugin.replace('${mod_group}', mod_group).replace('${mod_id}', mod_id)
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
         }
     }
-
-    //makeObfSourceJar = true
 }
-
-tasks.withType(JavaCompile) {
-    configure(options) {
-        options.compilerArgs.add("-XDignore.symbol.file=true")
-        options.fork = true
-        options.forkOptions.executable = 'javac'
-        options.encoding = 'utf-8'
-    }
-}
-
-task('sourceJar', type: Jar, dependsOn: classes) {
-    classifier = 'sources'
-    from sourceSets.main.allSource
-}
-
-artifacts {
-    archives jar
-    archives sourceJar
-}
-
 
 repositories {
-    mavenCentral()
-    maven {
-        url 'https://libraries.minecraft.net/'
-    }
-
     maven { url = 'https://repo.spongepowered.org/maven' }
-    mavenLocal()
 }
 
 configurations {
-    shade
-    implementation.extendsFrom shade
-}
-
-shadowJar {
-    archiveClassifier = ''
-    configurations = [project.configurations.shade]
-    relocate 'org.spongepowered.mixin', "${project.group}.relocated.mixin"
-    finalizedBy 'reobfShadowJar'
-}
-
-
-mixin {
-    defaultObfuscationEnv 'searge'
-
-    add sourceSets.main, 'mixins.oragehack.refmap.json'
-    config 'mixins.oragehack.json'
-
-    debug.verbose = true
-    debug.export = true
+    embed
+    compile.extendsFrom(embed)
 }
 
 dependencies {
-
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.2'
-
+    
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-    compileOnly 'me.oragejuice:processor:1.0'
+
+     // compileOnly 'me.oragejuice:processor:1.0'
     //annotationProcessor 'me.oragejuice:processor:1.0'
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
-    shade ('net.minecraft:launchwrapper:1.12')
+    implementation 'net.minecraft:launchwrapper:1.12'
     //shade ('me.oragejuice.eventbus:nukerbus:1.0')
     //shade ('me.oragejuice.commandDispatcher:CommandDispatcher:unspecified')
-    shade ( project(':nukerbus'))
-    shade ( project(':CommandDispatcher'))
+    implementation project(':nukerbus')
+    implementation project(':CommandDispatcher')
 
-    shade ('org.spongepowered:mixin:0.7.11-SNAPSHOT')
-    {
-        exclude module: 'log4j-core'
-        exclude module: 'launchwrapper'
+    embed('org.spongepowered:mixin:0.8.3-SNAPSHOT') {
         exclude module: 'guava'
         exclude module: 'commons-io'
         exclude module: 'gson'
     }
-
 }
 
-assemble.dependsOn shadowJar
+processResources {
+    inputs.property "version", project.version
+    inputs.property "mcversion", minecraft_version
 
-reobf {
-    shadowJar {}
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+
+        expand 'mod_id': mod_id, 'mod_name': mod_name, 'version': project.version,
+                'mcversion': minecraft_version, 'mod_description': mod_description,
+                'mod_author': mod_author
+    }
+
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
 }
 
-test {
-    useJUnitPlatform()
+mixin {
+    add sourceSets.main, mod_mixin_refmap.replace('${mod_id}', mod_id)
 }
 
 jar {
-    manifest {
-        attributes(
-            "MixinConfigs": "mixins.oragehack.json"
-        )
+    from {
+        configurations.embed.collect { it.isDirectory() ? it : zipTree(it) }
+    } {
+        exclude "LICENSE.txt", "META-INF/MANIFSET.MF", "META-INF/maven/**", "META-INF/*.RSA", "META-INF/*.SF"
     }
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
+    manifest {
+        attributes "FMLCorePlugin": mod_core_plugin.replace('${mod_group}', mod_group).replace('${mod_id}', mod_id)
+        attributes "FMLCorePluginContainsFMLMod": "false"
+        attributes "ForceLoadAsMod": "true"
+        attributes "TweakClass": "org.spongepowered.asm.launch.MixinTweaker"
+        attributes "TweakOrder": "0"
+        attributes "MixinConfigs": mod_mixin_configs.replace('${mod_id}', mod_id)
+    }
 }
+
 jar.finalizedBy('reobfJar')
