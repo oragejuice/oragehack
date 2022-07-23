@@ -114,7 +114,13 @@ processResources {
 }
 
 mixin {
-    add sourceSets.main, mod_mixin_refmap.replace('${mod_id}', mod_id)
+    defaultObfuscationEnv 'searge'
+
+    add sourceSets.main, 'mixins.oragehack.refmap.json'
+    config 'mixins.oragehack.json'
+
+    debug.verbose = true
+    debug.export = true
 }
 
 jar {
