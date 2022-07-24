@@ -1,22 +1,38 @@
 # oragehack
-### reinventing the idea of (((overe ngineered)))
+ reinventing the idea of (((overengineered)))
 
-## how to build
-- so basically you need to first build the processor
-- then push it to the maven local
-- only then can you build the main client :D
+## How to build
+run `./gradlew oragehack:build`
 
-## papers i read to help me
+build should be in `oragehack/build/libs`
+
+## Papers I need to read to help me
 - https://code.google.com/archive/p/java-gpu/
 - http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.174.8624&rep=rep1&type=pdf
-- 
-#### kk thanks bai
 
+## Credits
 - made by oragejuce with pain and love
-- thank u nuker (for being awesome) and 0x22 (for being mean)
+- thank u nuker (for being awesome) 
+- 0x22 (for being mean) also 254n_m (helping w/ gradle)
 
-## The Thing
-```{
+# How to install
+
+This assumes you use multimc
+
+Click `edit instance`
+
+Go to the `versions` tab
+
+Click `add empty`
+set `name` to `oragehack` and `uid` to `me.oragejuice.oragehack`
+
+Select `edit` and replace with the Json below
+
+Click `Open libraries` and drag the jar into it
+
+Install forge and make sure it loads **before** oragehack
+```
+{
     "+tweakers": [
         "me.oragejuice.oragehack.tweak.Tweaker"
     ], 
@@ -48,4 +64,29 @@
 ```
 
 Still not sure how this works on vanilla ngl \
-I juse use MultiMC
+I just use MultiMC
+
+#Contributing
+directed at *someone*
+
+## Formatting
+When writing classes and functions they should all follow the format
+```java
+class aClass {
+    public void aFunction() {
+        if (something()) {
+            //do thing
+        }
+    }
+}
+```
+take note of the use of Camel case, and the spacing after each call. 
+the braces should match the indentation of the call.
+
+## Design
+Secondly `static` functions should only be written if they are either purely functional (no side effects)
+unless if they interface with an inherently stateful system 
+e.g GL or MC itself. The exception to this is Factories.
+Otherwise, if needed then use singletons
+
+
