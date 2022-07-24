@@ -26,10 +26,10 @@ public class EnabledButton extends AbstractRect {
     public void draw(int mouseX, int mouseY, float partialTicks) {
         if(feature.isEnabled()){
             DrawHelper.drawFilledRoundedRect(x,y,x+width,y+height,8, Color.GREEN);              //background
-            DrawHelper.drawFilledRoundedRect(x + 2,y + 2,x+width-height-4,y+height-2,6, Color.WHITE); //button
+            DrawHelper.drawFilledRoundedRect(x + 2 + width - height,y + 2,x+width-4,y+height-2,6, Color.WHITE); //button
         } else {
             DrawHelper.drawFilledRoundedRect(x,y,x+width,y+height,8, panelColor);                  //background
-            DrawHelper.drawFilledRoundedRect(x + 2,y + 2,x+height - 4,y+height-2,6, Color.WHITE); //button
+            DrawHelper.drawFilledRoundedRect(x + 2,y + 2,x+height-4,y+height-2,6, Color.WHITE); //button
 
         }
     }

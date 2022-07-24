@@ -113,8 +113,20 @@ processResources {
     duplicatesStrategy = 'include'
 }
 
+assemble.dependsOn shadowJar
+
+reobf {
+    shadowJar {}
+}
+
 mixin {
-    add sourceSets.main, mod_mixin_refmap.replace('${mod_id}', mod_id)
+    defaultObfuscationEnv 'searge'
+
+    add sourceSets.main, 'mixins.oragehack.refmap.json'
+    config 'mixins.oragehack.json'
+
+    debug.verbose = true
+    debug.export = true
 }
 
 jar {
@@ -125,12 +137,7 @@ jar {
     }
 
     manifest {
-        attributes "FMLCorePlugin": mod_core_plugin.replace('${mod_group}', mod_group).replace('${mod_id}', mod_id)
-        attributes "FMLCorePluginContainsFMLMod": "false"
-        attributes "ForceLoadAsMod": "true"
-        attributes "TweakClass": "org.spongepowered.asm.launch.MixinTweaker"
-        attributes "TweakOrder": "0"
-        attributes "MixinConfigs": mod_mixin_configs.replace('${mod_id}', mod_id)
+        attributes ("MixinConfigs": "mixins.oragehack.json")
     }
 }
 
