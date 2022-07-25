@@ -93,15 +93,6 @@ public abstract class GuiTextFieldMixin {
             }
         }
 
-        /* TODO tab completion for suggestions
-        if(keyCode == Keyboard.KEY_TAB){
-            i = text.lastIndexOf(" ");
-            if(!suggestions.isEmpty() && i != -1){
-                this.text = text.substring(0,i-1) + " " + suggestions;
-            }
-        }
-
-         */
     }
 
 }

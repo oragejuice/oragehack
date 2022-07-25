@@ -13,6 +13,7 @@ import java.util.Scanner;
 
 public class Configurator {
 
+    //TODO add descriptions
     private final File mainDirectory = new File("oragehack/");
     private final File configFile = new File("oragehack/config.yaml");
     static FileWriter fw;

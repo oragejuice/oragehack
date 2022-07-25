@@ -15,10 +15,12 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 
 public abstract class Feature implements IListener, INameable, Globals, ISubSetting {
+
     final String name;
     public int keybind = Keyboard.KEY_NONE;
     private IListener[] listeners;
     private boolean enabled = false;
+    private final int priority;
 
     public Categories getCategory() {
         return category;
@@ -28,15 +30,14 @@ public abstract class Feature implements IListener, INameable, Globals, ISubSett
 
     private final ArrayList<GenericSetting> settings = new ArrayList<GenericSetting>();
 
-
-
     private final ArrayList<GenericSetting> flattenedSettings = new ArrayList<GenericSetting>();
 
 
-    public Feature(String name, Categories category, IListener... listeners) {
+    public Feature(String name, Categories category, int priority, IListener... listeners) {
         this.listeners = listeners;
         this.name = name;
         this.category = category;
+        this.priority = priority;
         Oragehack.INSTANCE.featureManager.registerFeature(this);
     }
 
@@ -118,7 +119,6 @@ public abstract class Feature implements IListener, INameable, Globals, ISubSett
     }
 
     private void registerFlattenedSetting(GenericSetting setting){
-        Oragehack.LOGGER.info("Saving to flattened: {}", setting.getName());
         this.flattenedSettings.add(setting);
         for (Object subSetting : setting.getSettings()) {
             registerFlattenedSetting((GenericSetting) subSetting);
@@ -126,6 +126,7 @@ public abstract class Feature implements IListener, INameable, Globals, ISubSett
 
     }
 
-
-
+    public int getPriority() {
+        return priority;
+    }
 }

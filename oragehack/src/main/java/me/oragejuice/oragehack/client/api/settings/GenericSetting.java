@@ -5,7 +5,7 @@ import me.oragejuice.oragehack.client.api.INameable;
 
 import java.util.ArrayList;
 
-public class GenericSetting<T> implements INameable, ISubSetting {
+public class GenericSetting<T> implements INameable, ISubSetting, ISetting<T> {
 
     GenericSetting parent;
 
@@ -51,14 +51,18 @@ public class GenericSetting<T> implements INameable, ISubSetting {
         return max;
     }
 
+    @Override
     public void setValue(T value){
         this.value = value;
     }
 
+
     public void registerChild(GenericSetting... children){
         for (GenericSetting child : children) {
-            childrenSettings.add(child);
-            child.parent = this;
+            if(!childrenSettings.contains(child)) {
+                childrenSettings.add(child);
+                child.parent = this;
+            }
         }
     }
 
@@ -78,13 +82,18 @@ public class GenericSetting<T> implements INameable, ISubSetting {
     public void setValue(String string){
 
         if(value instanceof Double){
-            this.value = (T) Double.valueOf(string);
+            setValue((T) Double.valueOf(string));
         } else if(value instanceof Float){
-            this.value = (T) Float.valueOf(string);
+            setValue((T) Float.valueOf(string));
         } else if(value instanceof Boolean){
-            this.value = (T) Boolean.valueOf(string);
+           setValue((T) Boolean.valueOf(string));
         }
         Oragehack.LOGGER.info("value set to: {} - {}", value, this.name);
+    }
+
+    public void setParent(GenericSetting parent) {
+        this.parent = parent;
+        parent.registerChild(this);
     }
 
     @Override
