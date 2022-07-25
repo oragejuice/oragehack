@@ -3,7 +3,8 @@
   "package": "me.oragejuice.oragehack.mixins",
   "refmap": "mixins.oragehack.refmap.json",
   "mixins": [
-    "gui.GuiTextFieldAccessor"
+    "gui.GuiTextFieldAccessor",
+    "network.packets.CPacketPlayerAccessor"
   ],
   "client": [
     "KeyBindingMixin",

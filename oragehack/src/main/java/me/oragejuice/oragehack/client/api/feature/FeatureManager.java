@@ -2,6 +2,7 @@ package me.oragejuice.oragehack.client.api.feature;
 
 import me.oragejuice.oragehack.Oragehack;
 import me.oragejuice.oragehack.client.features.modules.clickGui.ClickGuiFeature;
+import me.oragejuice.oragehack.client.features.modules.rotations.Rotations;
 import me.oragejuice.oragehack.client.features.modules.testFeature.TestFeature;
 import me.oragejuice.oragehack.client.features.modules.watermark.Watermark;
 
@@ -11,6 +12,7 @@ public class FeatureManager {
 
     private ArrayList<Feature> features = new ArrayList<>();
 
+    public Rotations rotations;
     public TestFeature testFeature;
     public Watermark watermark;
     public ClickGuiFeature clickGuiFeature;
@@ -19,10 +21,10 @@ public class FeatureManager {
         testFeature = new TestFeature();
         watermark = new Watermark();
         clickGuiFeature = new ClickGuiFeature();
-
+        rotations = new Rotations();
 
         for (Feature feature : features) {
-            Oragehack.LOGGER.info(feature.getName() + " loaded");
+            //Oragehack.LOGGER.info(feature.getName() + " loaded");
         }
     }
 
