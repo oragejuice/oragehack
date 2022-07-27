@@ -19,7 +19,7 @@ import java.util.List;
 public class Esp extends Feature {
 
     public GenericSetting<Boolean> storage = new GenericSetting<>("Storages", true);
-    public GenericSetting<Float> outlineWidth = new GenericSetting<>("Outline Width", 1f);
+    public GenericSetting<Float> outlineWidth = new GenericSetting<>("Outline Width", 2f);
     public GenericSetting<Boolean> item = new GenericSetting<>("Items", true);
     public GenericSetting<Boolean> player = new GenericSetting<>("Players", true);
     GenericSetting<Boolean> hostile = new GenericSetting<>("Hostile", true);
@@ -59,8 +59,6 @@ public class Esp extends Feature {
     private final ArrayList<AxisAlignedBB> chests = new ArrayList<>();
     private final ArrayList<AxisAlignedBB> trappedChests = new ArrayList<>();
     private final ArrayList<BlockPos> shulkers = new ArrayList<>();
-    private final ArrayList<BlockPos> hoppers = new ArrayList<>();
-    private final ArrayList<BlockPos> barrels = new ArrayList<>();
     private final ArrayList<BlockPos> enderChests = new ArrayList<>();
 
     public static Esp instance;
