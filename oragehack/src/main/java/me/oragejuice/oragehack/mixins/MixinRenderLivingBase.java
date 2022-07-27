@@ -1,21 +1,28 @@
 package me.oragejuice.oragehack.mixins;
 
-import me.oragejuice.oragehack.client.api.render.Color;
 import me.oragejuice.oragehack.client.api.render.OutlineUtils;
 import me.oragejuice.oragehack.client.features.modules.Esp;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLivingBase;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
+import java.awt.*;
+
 @Mixin(RenderLivingBase.class)
-public abstract class MixinRenderLivingBase extends MixinRender {
+public abstract class MixinRenderLivingBase extends Render {
 
     @Shadow protected ModelBase mainModel;
+
+    protected MixinRenderLivingBase(RenderManager p_i46179_1_) {
+        super(p_i46179_1_);
+    }
 
     /**
      * @author Jenni
