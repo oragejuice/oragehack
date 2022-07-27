@@ -6,8 +6,10 @@
     "gui.GuiTextFieldAccessor"
   ],
   "client": [
+    "EntityRendererMixin",
     "KeyBindingMixin",
     "MinecraftMixin",
+    "MixinRenderLivingBase",
     "entity.EntityPlayerSPMixin",
     "gui.GuiChatMixin",
     "gui.GuiNewChatMixin",
