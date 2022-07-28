@@ -1,6 +1,5 @@
 package me.oragejuice.oragehack.mixins.network;
 
-import me.oragejuice.oragehack.Oragehack;
 import me.oragejuice.oragehack.client.Globals;
 import me.oragejuice.oragehack.client.api.rotation.Rotation;
 import me.oragejuice.oragehack.client.api.rotation.RotationHandler;
@@ -44,7 +43,6 @@ public class NetHandlerPlayClientMixin implements Globals {
             //update the cache
             RotationHandler.serverYaw = ((CPacketPlayerAccessor) packetIn).getYaw();
             RotationHandler.serverPitch = ((CPacketPlayerAccessor) packetIn).getPitch();
-            //Oragehack.LOGGER.info("server: yaw: {}, pitch: {}", RotationHandler.serverYaw, RotationHandler.serverPitch);
         }
     }
 }

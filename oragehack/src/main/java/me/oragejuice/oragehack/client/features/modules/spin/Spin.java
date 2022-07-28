@@ -1,7 +1,6 @@
 package me.oragejuice.oragehack.client.features.modules.spin;
 
 import me.oragejuice.eventbus.EventHandler;
-import me.oragejuice.oragehack.Oragehack;
 import me.oragejuice.oragehack.client.api.event.PlayerUpdateEvent;
 import me.oragejuice.oragehack.client.api.feature.Categories;
 import me.oragejuice.oragehack.client.api.feature.Feature;
@@ -19,7 +18,6 @@ public class Spin extends Feature {
 
     @EventHandler
     public void onUpdate(PlayerUpdateEvent event){
-        //Oragehack.LOGGER.info("spin event called");
         RotationHandler.postRotation(new Rotation(MathHelper.wrapDegrees(x += 5F), 0, 0));
     }
 }
