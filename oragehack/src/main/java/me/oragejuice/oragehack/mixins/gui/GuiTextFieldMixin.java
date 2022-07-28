@@ -58,7 +58,7 @@ public abstract class GuiTextFieldMixin {
             int j = this.cursorPosition - this.lineScrollOffset;
             String s = Minecraft.getMinecraft().fontRenderer.trimStringToWidth(this.text.substring(this.lineScrollOffset), getWidth());
             boolean flag = j >= 0 && j <= s.length();
-            int l = this.enableBackgroundDrawing ? this.x : this.x;
+            int l = this.x;
             int i1 = this.enableBackgroundDrawing ? this.y + (this.height - 8) / 2 : this.y;
 
             if (!s.isEmpty())
