@@ -28,7 +28,7 @@ public class Set {
         for (int i = 0; i < featureNodes.length; i++) {
             featureNodes[i] = new ArgumentNode(
                     "(?i)" + features[i].getName(),
-                    new String[]{features[i].getName()},
+                    new String[]{features[i].getName().replaceAll(" ", "_")},
                     1,
                     generateSettingArgumentNodes(features[i])
             );

@@ -4,6 +4,7 @@ import me.oragejuice.oragehack.Oragehack;
 import me.oragejuice.oragehack.client.features.modules.Esp;
 import me.oragejuice.oragehack.client.features.modules.clickGui.ClickGuiFeature;
 import me.oragejuice.oragehack.client.features.modules.rotations.Rotations;
+import me.oragejuice.oragehack.client.features.modules.spin.Spin;
 import me.oragejuice.oragehack.client.features.modules.testFeature.TestFeature;
 import me.oragejuice.oragehack.client.features.modules.watermark.Watermark;
 
@@ -17,19 +18,17 @@ public class FeatureManager {
     public TestFeature testFeature;
     public Watermark watermark;
     public ClickGuiFeature clickGuiFeature;
+    public Esp esp;
+    public Spin spin;
 
     public void init() {
         testFeature = new TestFeature();
         watermark = new Watermark();
-
-        new Esp();
-
+        esp = new Esp();
         clickGuiFeature = new ClickGuiFeature();
         rotations = new Rotations();
+        spin = new Spin();
 
-        for (Feature feature : features) {
-            //Oragehack.LOGGER.info(feature.getName() + " loaded");
-        }
     }
 
     public ArrayList<Feature> getFeatures(){

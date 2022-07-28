@@ -13,7 +13,7 @@ public class Watermark extends Feature {
     GenericSetting<Boolean> watermarktestBoolean = new GenericSetting<Boolean>("wat", false);
 
     public Watermark() {
-        super("Watermark", Categories.RENDER);
+        super("Watermark", Categories.RENDER, 1);
         this.setEnabled(true);
 
         this.registerSettings(watermarktestBoolean);
