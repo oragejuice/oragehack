@@ -1,4 +1,4 @@
-package me.oragejuice.oragehack.client.features.modules.rotations;
+package me.oragejuice.oragehack.client.features.modules.client.rotations;
 
 import me.oragejuice.oragehack.client.api.feature.Categories;
 import me.oragejuice.oragehack.client.api.feature.Feature;

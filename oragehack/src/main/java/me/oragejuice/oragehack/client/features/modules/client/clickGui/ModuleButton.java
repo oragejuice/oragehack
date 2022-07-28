@@ -1,10 +1,10 @@
-package me.oragejuice.oragehack.client.features.modules.clickGui;
+package me.oragejuice.oragehack.client.features.modules.client.clickGui;
 
 import me.oragejuice.oragehack.client.api.feature.Feature;
 import me.oragejuice.oragehack.client.api.render.DrawHelper;
 import me.oragejuice.oragehack.client.api.render.font.CFontRenderer;
 import me.oragejuice.oragehack.client.api.render.gui.AbstractRect;
-import me.oragejuice.oragehack.client.features.modules.clickGui.settingButtons.EnabledButton;
+import me.oragejuice.oragehack.client.features.modules.client.clickGui.settingButtons.EnabledButton;
 
 import java.awt.*;
 

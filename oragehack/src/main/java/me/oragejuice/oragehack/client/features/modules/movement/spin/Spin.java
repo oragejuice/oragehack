@@ -1,4 +1,4 @@
-package me.oragejuice.oragehack.client.features.modules.spin;
+package me.oragejuice.oragehack.client.features.modules.movement.spin;
 
 import me.oragejuice.eventbus.EventHandler;
 import me.oragejuice.oragehack.client.api.event.PlayerUpdateEvent;

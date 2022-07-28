@@ -1,4 +1,4 @@
-package me.oragejuice.oragehack.client.features.modules.watermark;
+package me.oragejuice.oragehack.client.features.modules.render.watermark;
 
 import me.oragejuice.eventbus.EventHandler;
 import me.oragejuice.oragehack.client.api.feature.Categories;

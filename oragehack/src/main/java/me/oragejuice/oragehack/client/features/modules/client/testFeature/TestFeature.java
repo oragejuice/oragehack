@@ -1,13 +1,10 @@
-package me.oragejuice.oragehack.client.features.modules.testFeature;
+package me.oragejuice.oragehack.client.features.modules.client.testFeature;
 
-import me.oragejuice.eventbus.EventHandler;
 import me.oragejuice.oragehack.client.api.feature.Categories;
 import me.oragejuice.oragehack.client.api.feature.Feature;
 import me.oragejuice.oragehack.client.api.settings.GenericSetting;
 import me.oragejuice.oragehack.client.api.settings.SettingBuilder;
 import me.oragejuice.oragehack.client.api.settings.premade.BooleanSetting;
-import me.oragejuice.oragehack.client.api.settings.premade.FloatSetting;
-import net.minecraft.network.play.client.CPacketPlayer;
 import org.lwjgl.input.Keyboard;
 
 public class TestFeature extends Feature {

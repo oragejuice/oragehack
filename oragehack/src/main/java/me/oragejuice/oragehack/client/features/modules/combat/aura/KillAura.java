@@ -1,4 +1,4 @@
-package me.oragejuice.oragehack.client.features.modules.aura;
+package me.oragejuice.oragehack.client.features.modules.combat.aura;
 
 import me.oragejuice.eventbus.EventHandler;
 import me.oragejuice.oragehack.client.api.event.PlayerUpdateEvent;

@@ -1,4 +1,4 @@
-package me.oragejuice.oragehack.client.features.modules.fakePlayer;
+package me.oragejuice.oragehack.client.features.modules.client.fakePlayer;
 
 import com.mojang.authlib.GameProfile;
 import me.oragejuice.oragehack.client.api.IListener;
