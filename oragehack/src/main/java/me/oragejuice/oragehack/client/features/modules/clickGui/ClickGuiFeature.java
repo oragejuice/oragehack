@@ -7,7 +7,7 @@ import org.lwjgl.input.Keyboard;
 public class ClickGuiFeature extends Feature {
 
     public ClickGuiFeature() {
-        super("Click Gui", Categories.CLIENT);
+        super("Click Gui", Categories.CLIENT, 10);
         super.keybind = Keyboard.KEY_SEMICOLON;
     }
 

@@ -16,11 +16,11 @@ import org.spongepowered.asm.mixin.Shadow;
 import java.awt.*;
 
 @Mixin(RenderLivingBase.class)
-public abstract class MixinRenderLivingBase extends Render {
+public abstract class RenderLivingBaseMixin extends Render {
 
     @Shadow protected ModelBase mainModel;
 
-    protected MixinRenderLivingBase(RenderManager p_i46179_1_) {
+    protected RenderLivingBaseMixin(RenderManager p_i46179_1_) {
         super(p_i46179_1_);
     }
 

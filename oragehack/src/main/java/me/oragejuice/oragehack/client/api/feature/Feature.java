@@ -1,6 +1,7 @@
 package me.oragejuice.oragehack.client.api.feature;
 
 
+import com.mojang.realmsclient.gui.ChatFormatting;
 import me.oragejuice.eventbus.EventHandler;
 import me.oragejuice.oragehack.Oragehack;
 import me.oragejuice.oragehack.client.Globals;
@@ -9,6 +10,7 @@ import me.oragejuice.oragehack.client.api.IListener;
 import me.oragejuice.oragehack.client.api.settings.GenericSetting;
 import me.oragejuice.oragehack.client.api.settings.ISubSetting;
 import me.oragejuice.oragehack.client.api.event.KeypressEvent;
+import net.minecraft.util.text.TextComponentString;
 import org.lwjgl.input.Keyboard;
 
 import javax.annotation.Nonnull;
@@ -41,9 +43,18 @@ public abstract class Feature implements IListener, INameable, Globals, ISubSett
         Oragehack.INSTANCE.featureManager.registerFeature(this);
     }
 
-    protected void onEnable(){};
+    public Feature(String name, Categories category,  IListener... listeners) {
+        this(name, category, 100, listeners);
+    }
 
-    protected void onDisable(){};
+    protected void onEnable(){
+        mc.ingameGUI.getChatGUI().printChatMessageWithOptionalDeletion(new TextComponentString(name + ChatFormatting.GREEN + " enabled"), 0);
+    }
+
+    protected void onDisable(){
+        mc.ingameGUI.getChatGUI().printChatMessageWithOptionalDeletion(new TextComponentString(name + ChatFormatting.RED + " disabled"), 0);
+
+    }
 
 
     public void setEnabled(boolean enabled) {
@@ -53,11 +64,13 @@ public abstract class Feature implements IListener, INameable, Globals, ISubSett
             for (IListener listener : listeners) {
                 Oragehack.INSTANCE.eventBus.subscribe(listener);
             }
+            Oragehack.INSTANCE.eventBus.subscribe(this);
             onEnable();
         } else {
             for (IListener listener : listeners) {
                 Oragehack.INSTANCE.eventBus.unsubscribe(listener);
             }
+            Oragehack.INSTANCE.eventBus.unsubscribe(this);
             onDisable();
         }
     }
