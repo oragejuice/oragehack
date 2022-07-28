@@ -1,7 +1,6 @@
 package me.oragejuice.oragehack.mixins.entity;
 
 import me.oragejuice.oragehack.client.Globals;
-import me.oragejuice.oragehack.client.api.rotation.Rotation;
 import me.oragejuice.oragehack.client.api.rotation.RotationHandler;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.entity.RenderPlayer;
