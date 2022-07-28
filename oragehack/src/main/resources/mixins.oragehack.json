@@ -6,7 +6,8 @@
     "entity.EntityPlayerMixin",
     "gui.GuiTextFieldAccessor",
     "network.NetworkManagerMixin",
-    "network.packets.CPacketPlayerAccessor"
+    "network.packets.CPacketPlayerAccessor",
+    "network.packets.incoming.SPacketExplosionAccessor"
   ],
   "client": [
     "EntityRendererMixin",

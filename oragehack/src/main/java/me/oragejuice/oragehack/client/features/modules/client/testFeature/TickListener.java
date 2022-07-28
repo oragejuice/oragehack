@@ -1,4 +1,4 @@
-package me.oragejuice.oragehack.client.features.modules.testFeature;
+package me.oragejuice.oragehack.client.features.modules.client.testFeature;
 
 import me.oragejuice.eventbus.EventHandler;
 import me.oragejuice.oragehack.Oragehack;

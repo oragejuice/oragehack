@@ -6,7 +6,16 @@ import net.minecraft.network.play.INetHandlerPlayClient;
 import net.minecraft.network.play.INetHandlerPlayServer;
 
 public class PacketEvent extends AbstractCancelable {
-    public Packet<?> packet;
+
+    public Packet<?> getPacket() {
+        return packet;
+    }
+
+    public void setPacket(Packet<?> packet) {
+        this.packet = packet;
+    }
+
+    private Packet<?> packet;
     public PacketEvent(Packet<?> packet) {
         this.packet = packet;
     }

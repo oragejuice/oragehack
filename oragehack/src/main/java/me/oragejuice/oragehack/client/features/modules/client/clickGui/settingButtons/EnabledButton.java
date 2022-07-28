@@ -1,4 +1,4 @@
-package me.oragejuice.oragehack.client.features.modules.clickGui.settingButtons;
+package me.oragejuice.oragehack.client.features.modules.client.clickGui.settingButtons;
 
 import me.oragejuice.oragehack.client.api.feature.Feature;
 import me.oragejuice.oragehack.client.api.render.DrawHelper;

@@ -1,4 +1,4 @@
-package me.oragejuice.oragehack.client.features.modules.clickGui;
+package me.oragejuice.oragehack.client.features.modules.client.clickGui;
 
 import me.oragejuice.oragehack.client.api.feature.Categories;
 import net.minecraft.client.gui.GuiScreen;
