@@ -1,6 +1,7 @@
 package me.oragejuice.oragehack.client.api.feature;
 
 import me.oragejuice.oragehack.Oragehack;
+import me.oragejuice.oragehack.client.features.modules.Esp;
 import me.oragejuice.oragehack.client.features.modules.clickGui.ClickGuiFeature;
 import me.oragejuice.oragehack.client.features.modules.rotations.Rotations;
 import me.oragejuice.oragehack.client.features.modules.testFeature.TestFeature;
@@ -20,6 +21,9 @@ public class FeatureManager {
     public void init() {
         testFeature = new TestFeature();
         watermark = new Watermark();
+
+        new Esp();
+
         clickGuiFeature = new ClickGuiFeature();
         rotations = new Rotations();
 
