@@ -11,7 +11,9 @@ build should be in `oragehack/build/libs`
 - http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.174.8624&rep=rep1&type=pdf
 
 ## Credits
-- made by oragejuce with pain and love
+- made by oragejuce (mostly) with pain and love
+- Jenni
+- 254n_m for github CI stuff
 - thank u nuker (for being awesome) 
 - 0x22 (for being mean) also 254n_m (helping w/ gradle)
 
