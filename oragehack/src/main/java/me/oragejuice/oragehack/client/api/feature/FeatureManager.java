@@ -7,6 +7,7 @@ import me.oragejuice.oragehack.client.features.modules.combat.aura.KillAura;
 import me.oragejuice.oragehack.client.features.modules.movement.spin.Spin;
 import me.oragejuice.oragehack.client.features.modules.client.testFeature.TestFeature;
 import me.oragejuice.oragehack.client.features.modules.movement.velocity.Velocity;
+import me.oragejuice.oragehack.client.features.modules.render.crystalChams.CrystalChams;
 import me.oragejuice.oragehack.client.features.modules.render.watermark.Watermark;
 
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public class FeatureManager {
     public Spin spin;
     public Velocity velocity;
     public KillAura aura;
+    public CrystalChams crystalChams;
 
     public void init() {
         testFeature = new TestFeature();
@@ -33,6 +35,7 @@ public class FeatureManager {
         spin = new Spin();
         velocity = new Velocity();
         aura = new KillAura();
+        crystalChams = new CrystalChams();
 
     }
 
