@@ -10,7 +10,7 @@ public class GenericSetting<T> implements INameable, ISubSetting, ISetting<T> {
     GenericSetting parent;
 
     String name;
-    T value;
+    protected T value;
 
     T min;
     T max;
@@ -87,6 +87,9 @@ public class GenericSetting<T> implements INameable, ISubSetting, ISetting<T> {
             setValue((T) Float.valueOf(string));
         } else if(value instanceof Boolean){
            setValue((T) Boolean.valueOf(string));
+        } else {
+            Oragehack.LOGGER.info("couldntt set: {} - {}", value, this.name);
+            return;
         }
         Oragehack.LOGGER.info("value set to: {} - {}", value, this.name);
     }

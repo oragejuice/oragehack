@@ -100,11 +100,14 @@ public class Configurator {
                         }
                         continue;
                     } else {
-
+                        //must be referencing a setting
                         GenericSetting s = getSettingByName(subNodes.get(subNodes.size() - 1).getSettings(), data[0]);
                         if (s != null) {
+
                             // was able to find setting in from the top of the subnode stack
                             //as it has children it must be added to stack
+                            s.setValue(data[1].trim());
+
                             if (!s.getSettings().isEmpty()) {
                                 subNodes.add(s);
                             }

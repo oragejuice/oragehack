@@ -41,9 +41,9 @@ public class FloatSetting extends GenericSetting<Float> implements ISetting<Floa
     @Override
     public void setValue(Float value) {
         if(getMax() != null && getMin() != null) {
-            setValue(Math.min(getMax(), Math.max(getMin(), value)));
+            this.value = Math.min(getMax(), Math.max(getMin(), value));
         } else {
-            setValue(value);
+            this.value = value;
         }
     }
 

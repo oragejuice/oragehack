@@ -16,6 +16,8 @@
     "MinecraftMixin",
     "RenderLivingBaseMixin",
     "entity.EntityPlayerSPMixin",
+    "entity.ModelEnderCrystalMixin",
+    "entity.RenderEntityEnderCrystalMixin",
     "entity.RenderPlayerMixin",
     "gui.GuiChatMixin",
     "gui.GuiNewChatMixin",
