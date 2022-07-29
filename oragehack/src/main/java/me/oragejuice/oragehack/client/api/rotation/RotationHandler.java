@@ -15,18 +15,29 @@ public class RotationHandler {
     public static void postRotation(Rotation rotation){
 
         if(nextServerRotation == null){
-            nextServerRotation = rotation;
-            //Oragehack.LOGGER.info("null rotation needed to be overrired");
+            //nextServerRotation = rotation;
+            setNextServerRotation(rotation);
             return;
         }
 
         if(nextServerRotation.priority >= rotation.priority){
-            nextServerRotation = rotation;
-            //Oragehack.LOGGER.info("prio override for rotation");
+            setNextServerRotation(rotation);
         }
     }
 
-    //return the next rotation to be sent and reset to vanilla
+    private static void setNextServerRotation(Rotation rotation){
+        //we need to yawstep
+        if(Oragehack.INSTANCE.featureManager.rotations.isEnabled()){
+            nextServerRotation = new Rotation(
+                    Rotation.limitAngleChange(serverYaw, rotation.yaw, Oragehack.INSTANCE.featureManager.rotations.yawStep.getValue()),
+                    Rotation.limitAngleChange(serverPitch, rotation.pitch, Oragehack.INSTANCE.featureManager.rotations.pitchStep.getValue()),
+                    rotation.priority);
+        } else {
+            // no need to yawstep
+            nextServerRotation = rotation;
+        }
+    }
+
     public static Rotation pop(){
         try {
             return nextServerRotation;
@@ -35,7 +46,6 @@ public class RotationHandler {
         }
     }
 
-    // if nextServerRotation is null, it means we havent set a rotation to spoof yet
     public static boolean isSpoofing(){
         return (nextServerRotation != null);
     }
