@@ -29,9 +29,9 @@ public class Velocity extends Feature {
         }
 
          */
-        ((SPacketExplosionAccessor) event.packet).setMotionX( ((SPacketExplosionAccessor) event.packet).getMotionX() * horizontal.getValue());
-        ((SPacketExplosionAccessor) event.packet).setMotionY( ((SPacketExplosionAccessor) event.packet).getMotionY() * vertical.getValue());
-        ((SPacketExplosionAccessor) event.packet).setMotionZ( ((SPacketExplosionAccessor) event.packet).getMotionZ() * horizontal.getValue());
+        ((SPacketEntityVelocityAccessor) event.packet).setMotionX((int) (((SPacketEntityVelocityAccessor) event.packet).getMotionX() * horizontal.getValue()));
+        ((SPacketEntityVelocityAccessor) event.packet).setMotionY((int) (((SPacketEntityVelocityAccessor) event.packet).getMotionY() * vertical.getValue()));
+        ((SPacketEntityVelocityAccessor) event.packet).setMotionZ((int) (((SPacketEntityVelocityAccessor) event.packet).getMotionZ() * horizontal.getValue()));
     }
 
     @EventHandler
@@ -42,9 +42,9 @@ public class Velocity extends Feature {
             return;
         }
          */
-        ((SPacketEntityVelocityAccessor) event.packet).setMotionX((int) (((SPacketEntityVelocityAccessor) event.packet).getMotionX() * horizontal.getValue()));
-        ((SPacketEntityVelocityAccessor) event.packet).setMotionY((int) (((SPacketEntityVelocityAccessor) event.packet).getMotionY() * vertical.getValue()));
-        ((SPacketEntityVelocityAccessor) event.packet).setMotionZ((int) (((SPacketEntityVelocityAccessor) event.packet).getMotionZ() * horizontal.getValue()));
+        ((SPacketExplosionAccessor) event.packet).setMotionX((int) (((SPacketExplosionAccessor) event.packet).getMotionX() * horizontal.getValue()));
+        ((SPacketExplosionAccessor) event.packet).setMotionY((int) (((SPacketExplosionAccessor) event.packet).getMotionY() * vertical.getValue()));
+        ((SPacketExplosionAccessor) event.packet).setMotionZ((int) (((SPacketExplosionAccessor) event.packet).getMotionZ() * horizontal.getValue()));
     }
 
 

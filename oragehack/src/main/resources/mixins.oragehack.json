@@ -7,6 +7,7 @@
     "gui.GuiTextFieldAccessor",
     "network.NetworkManagerMixin",
     "network.packets.CPacketPlayerAccessor",
+    "network.packets.incoming.SPacketEntityVelocityAccessor",
     "network.packets.incoming.SPacketExplosionAccessor"
   ],
   "client": [
