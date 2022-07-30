@@ -32,6 +32,7 @@ public class RotationHandler {
                     Rotation.limitAngleChange(serverYaw, rotation.yaw, Oragehack.INSTANCE.featureManager.rotations.yawStep.getValue()),
                     Rotation.limitAngleChange(serverPitch, rotation.pitch, Oragehack.INSTANCE.featureManager.rotations.pitchStep.getValue()),
                     rotation.priority);
+
         } else {
             // no need to yawstep
             nextServerRotation = rotation;
