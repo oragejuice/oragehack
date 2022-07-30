@@ -31,7 +31,7 @@ public class CrystalChams extends Feature {
     GenericSetting<Float> width = new GenericSetting<>("width", 1F);
     GenericSetting<Boolean> depth = new GenericSetting<>("depth", true);
     GenericSetting<Integer> colour = new GenericSetting<>("colour", 0xF0F0F0);
-    GenericSetting<Boolean> selective = new GenericSetting<>("selective", true);
+    public GenericSetting<Boolean> selective = new GenericSetting<>("selective", true);
 
 
     @EventHandler
