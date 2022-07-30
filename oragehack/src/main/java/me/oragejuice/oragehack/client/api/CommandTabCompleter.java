@@ -20,7 +20,6 @@ public class CommandTabCompleter extends TabCompleter {
 
         //if completion breaks the command and removes the prefix
         if(!textField.getText().startsWith("`")){
-            Oragehack.LOGGER.info("removed prefix!");
             textField.setText("`" + textField.getText());
         }
 

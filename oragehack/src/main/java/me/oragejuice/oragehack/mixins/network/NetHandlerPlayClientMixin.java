@@ -1,5 +1,6 @@
 package me.oragejuice.oragehack.mixins.network;
 
+import me.oragejuice.oragehack.Oragehack;
 import me.oragejuice.oragehack.client.Globals;
 import me.oragejuice.oragehack.client.api.rotation.Rotation;
 import me.oragejuice.oragehack.client.api.rotation.RotationHandler;
@@ -19,7 +20,7 @@ public class NetHandlerPlayClientMixin implements Globals {
     public void sendPacketHook(Packet<?> packetIn, CallbackInfo ci){
         if (packetIn instanceof CPacketPlayer) {
 
-            //if vanilla is sending a Position packet but we also need to rotate, cancel it and send a Position and rotation packet
+            //if vanilla is sending a Position packet but we also need to rotate, overwrite it and send a Position and rotation packet
             if (packetIn instanceof CPacketPlayer.Position && RotationHandler.isSpoofing()){
                 packetIn = new CPacketPlayer.PositionRotation(
                         ((CPacketPlayer.Position) packetIn).getX(mc.player.posX), // Copy original packet
@@ -41,8 +42,11 @@ public class NetHandlerPlayClientMixin implements Globals {
             }
 
             //update the cache
-            RotationHandler.serverYaw = ((CPacketPlayerAccessor) packetIn).getYaw();
-            RotationHandler.serverPitch = ((CPacketPlayerAccessor) packetIn).getPitch();
+            //if is Position, then rotation is null and it will set it to 0 (funky business)
+            if(!(packetIn instanceof CPacketPlayer.Position)) {
+                RotationHandler.serverYaw = ((CPacketPlayerAccessor) packetIn).getYaw();
+                RotationHandler.serverPitch = ((CPacketPlayerAccessor) packetIn).getPitch();
+            }
         }
     }
 }

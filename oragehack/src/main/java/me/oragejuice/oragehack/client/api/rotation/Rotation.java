@@ -9,8 +9,6 @@ import java.util.Currency;
 
 public class Rotation extends PureRotation implements Globals {
 
-    public float yaw;
-    public float pitch;
     public int priority;
 
     public Rotation(float yaw, float pitch, int priority){

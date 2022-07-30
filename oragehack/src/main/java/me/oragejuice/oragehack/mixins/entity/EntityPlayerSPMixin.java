@@ -60,7 +60,7 @@ public abstract class EntityPlayerSPMixin implements Globals {
         boolean flag2 = d0 * d0 + d1 * d1 + d2 * d2 > 9.0E-4D || this.positionUpdateTicks >= 20;
         boolean flag3 = d3 != 0.0D || d4 != 0.0D;
 
-        if(RotationHandler.isSpoofing()
+        if(RotationHandler.isSpoofing() //is spoofing (nextServerRotation isnt null)
                 && (!mc.player.isRiding() && !flag2 && !flag3
                 && !(this.prevOnGround != mc.player.onGround))){ //making sure the packet hasnt been sent already this tick
 
