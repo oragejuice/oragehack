@@ -10,6 +10,7 @@ import me.oragejuice.oragehack.client.features.modules.movement.velocity.Velocit
 import me.oragejuice.oragehack.client.features.modules.render.crystalChams.CrystalChams;
 import me.oragejuice.oragehack.client.features.modules.render.watermark.Watermark;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 
 public class FeatureManager {
@@ -55,6 +56,7 @@ public class FeatureManager {
     }
 
     //Can return null
+    @Nullable
     public Feature getFeatureByName(String name){
         for (Feature feature : features) {
             if(feature.getName().equals(name)){

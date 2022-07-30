@@ -85,13 +85,14 @@ public class GenericSetting<T> implements INameable, ISubSetting, ISetting<T> {
             setValue((T) Double.valueOf(string));
         } else if(value instanceof Float){
             setValue((T) Float.valueOf(string));
-        } else if(value instanceof Boolean){
-           setValue((T) Boolean.valueOf(string));
+        } else if(value instanceof Boolean) {
+            setValue((T) Boolean.valueOf(string));
+        } else if (value instanceof Integer){
+            setValue((T) Integer.valueOf(string));
         } else {
-            Oragehack.LOGGER.info("couldntt set: {} - {}", value, this.name);
+            Oragehack.LOGGER.error("couldntt set: {} - {}", value, this.name);
             return;
         }
-        Oragehack.LOGGER.info("value set to: {} - {}", value, this.name);
     }
 
     public void setParent(GenericSetting parent) {
