@@ -15,6 +15,7 @@
     "KeyBindingMixin",
     "MinecraftMixin",
     "RenderLivingBaseMixin",
+    "RenderManagerAccessor",
     "entity.EntityPlayerSPMixin",
     "entity.ModelEnderCrystalMixin",
     "entity.RenderEntityEnderCrystalMixin",

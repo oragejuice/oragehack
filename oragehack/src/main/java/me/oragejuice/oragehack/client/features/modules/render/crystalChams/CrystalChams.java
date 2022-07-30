@@ -1,13 +1,19 @@
 package me.oragejuice.oragehack.client.features.modules.render.crystalChams;
 
 import me.oragejuice.eventbus.EventHandler;
+import me.oragejuice.oragehack.Oragehack;
 import me.oragejuice.oragehack.client.api.IListener;
+import me.oragejuice.oragehack.client.api.event.Render3dEvent;
 import me.oragejuice.oragehack.client.api.event.RenderCrystalEvent;
 import me.oragejuice.oragehack.client.api.feature.Categories;
 import me.oragejuice.oragehack.client.api.feature.Feature;
+import me.oragejuice.oragehack.client.api.render.RenderHelper;
 import me.oragejuice.oragehack.client.api.settings.GenericSetting;
+import me.oragejuice.oragehack.mixins.RenderManagerAccessor;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.awt.*;
@@ -145,6 +151,27 @@ public class CrystalChams extends Feature {
 
         glPopAttrib();
         glPopMatrix();
+    }
+
+
+    @EventHandler
+    public void onRender3d(Render3dEvent event){
+        //Event *is* being called
+
+        RenderHelper.begin3D();
+        final Vec3d pos = mc.player.getPositionVector();
+        final AxisAlignedBB bb = new AxisAlignedBB(
+                pos.x - ((RenderManagerAccessor) mc.getRenderManager()).getRenderPosX(),
+                pos.y - ((RenderManagerAccessor) mc.getRenderManager()).getRenderPosY(),
+                pos.z - ((RenderManagerAccessor) mc.getRenderManager()).getRenderPosZ(),
+                pos.x + 1 - ((RenderManagerAccessor) mc.getRenderManager()).getRenderPosX(),
+                pos.y + 1 -((RenderManagerAccessor) mc.getRenderManager()).getRenderPosY(),
+                pos.z + 1 - ((RenderManagerAccessor) mc.getRenderManager()).getRenderPosZ()
+        );
+
+        RenderHelper.drawFilledBox(bb, Color.ORANGE.getRGB());
+
+        RenderHelper.end3D();
     }
 
 
