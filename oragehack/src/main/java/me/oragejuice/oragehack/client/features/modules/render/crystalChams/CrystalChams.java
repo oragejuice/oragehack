@@ -17,7 +17,6 @@ import static org.lwjgl.opengl.GL11.glPopMatrix;
 
 public class CrystalChams extends Feature {
 
-    //TODO change crystal bob speed
 
     public CrystalChams() {
         super("CrystalChams", Categories.RENDER);
@@ -29,6 +28,7 @@ public class CrystalChams extends Feature {
     GenericSetting<Boolean> blend = new GenericSetting<>("blend", true);
     GenericSetting<Boolean> lighting = new GenericSetting<>("lighting", true);
     GenericSetting<Float> width = new GenericSetting<>("width", 1F);
+    GenericSetting<Float> animationSpeed = new GenericSetting<>("animation_speed", 1F);
     GenericSetting<Boolean> depth = new GenericSetting<>("depth", true);
     GenericSetting<Integer> colour = new GenericSetting<>("colour", 0xF0F0F0);
     public GenericSetting<Boolean> selective = new GenericSetting<>("selective", true);
@@ -51,7 +51,7 @@ public class CrystalChams extends Feature {
         glPushAttrib(GL_ALL_ATTRIB_BITS);
 
         // model rotations
-        float rotation = event.getEntityEnderCrystal().innerRotation + event.getPartialTicks();
+        float rotation = (event.getEntityEnderCrystal().innerRotation + event.getPartialTicks()) * animationSpeed.getValue();
         float rotationMoved = MathHelper.sin(rotation * 0.2F) / 2 + 0.5F;
         rotationMoved += StrictMath.pow(rotationMoved, 2);
 
