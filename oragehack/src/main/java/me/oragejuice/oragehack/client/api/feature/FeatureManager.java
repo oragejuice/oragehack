@@ -4,10 +4,12 @@ import me.oragejuice.oragehack.client.features.modules.Esp;
 import me.oragejuice.oragehack.client.features.modules.client.clickGui.ClickGuiFeature;
 import me.oragejuice.oragehack.client.features.modules.client.rotations.Rotations;
 import me.oragejuice.oragehack.client.features.modules.combat.aura.KillAura;
+import me.oragejuice.oragehack.client.features.modules.combat.autototem.AutoTotem;
 import me.oragejuice.oragehack.client.features.modules.movement.spin.Spin;
 import me.oragejuice.oragehack.client.features.modules.client.testFeature.TestFeature;
 import me.oragejuice.oragehack.client.features.modules.movement.velocity.Velocity;
 import me.oragejuice.oragehack.client.features.modules.render.TestESP;
+import me.oragejuice.oragehack.client.features.modules.render.brightness.Brightness;
 import me.oragejuice.oragehack.client.features.modules.render.crystalChams.CrystalChams;
 import me.oragejuice.oragehack.client.features.modules.render.watermark.Watermark;
 
@@ -28,6 +30,8 @@ public class FeatureManager {
     public KillAura aura;
     public CrystalChams crystalChams;
     public TestESP testESP;
+    public AutoTotem autoTotem;
+    public Brightness brightness;
 
     public void init() {
         testFeature = new TestFeature();
@@ -40,6 +44,8 @@ public class FeatureManager {
         aura = new KillAura();
         crystalChams = new CrystalChams();
         testESP = new TestESP();
+        autoTotem = new AutoTotem();
+        brightness = new Brightness();
     }
 
     public ArrayList<Feature> getFeatures(){

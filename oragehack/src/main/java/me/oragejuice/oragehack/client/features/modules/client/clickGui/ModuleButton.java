@@ -36,7 +36,7 @@ public class ModuleButton extends AbstractRect {
     @Override
     public void onMouseClicked(int mouseX, int mouseY, int state) {
         if(isInside(mouseX, mouseY)){
-            feature.toggle();
+            //feature.toggle();
         }
         enabledButton.onMouseClicked(mouseX, mouseY, state);
     }
